@@ -1,0 +1,188 @@
+.App {
+  text-align: center;
+  font-family: 'Kanit', sans-serif;
+}
+
+h5{
+  text-align: center;
+
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.buttom{
+
+  border-radius: 6px;
+  text-align: center;
+  background-image: linear-gradient(40deg, #048dad, #9af675);
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+
+}
+
+.buttom:hover {
+  background-image: linear-gradient(40deg, #9af675, #048dad);
+  text-align: center;
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+
+  
+}
+
+li{
+  padding: 10%;
+  
+}
+
+#box2{
+  text-align: center;
+}
+
+#box{
+  border-style: solid;
+  border-width: thin;
+  border-color: lightblue;
+  text-align: center;
+  padding: 3%;
+  border-radius: 20px;
+}
+
+
+
+.product {
+  background-color: white;
+  width: 220px;
+  display: block;
+  padding: 6px;
+  height: 320px;
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.product:hover {
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+
+
+.product-image {
+  transition:0.5s;
+  /* background: whitesmoke; */
+/* 
+  content:url(http://placehold.it/350x150); */
+  height: 200px;
+  width: 200px;
+}
+
+.product p {
+  text-align: left;
+  padding-left: 20px;
+  font-size: 18px;
+  color: blue;
+}
+
+.price {
+  color: rgba(0, 0, 0, 0.6);
+  background-color: #ffe68b;
+  display: block;
+  width: 80px;
+  padding: 10px 5px 10px 0px;
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  text-align: right;
+  font-family: courier;
+  border-radius: 2px;
+  filter: drop-shadow(1px 1px 0.8px rgba(0, 0, 0, 0.2));
+  transform: rotateZ(-5deg) scale(1);
+  transition: all 0.5s ease;
+}
+
+body .product:nth-child(4n+2) .price {
+  transform: rotateZ(2deg) scale(1);
+}
+
+body .product:nth-child(2n+3) .price {
+  transform: rotateZ(6deg) scale(1);
+}
+
+.price::before {
+  content: "";
+  padding: 18px;
+  position: absolute;
+  background-color: #ffe68b;
+  left: -6px;
+  top: 1px;
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+  z-index: -1;
+}
+
+.price::after {
+  content: "";
+  padding: 18px;
+  position: absolute;
+  background-color: #ffe68b;
+  right: -6px;
+  top: 1px;
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
+  z-index: -1;
+}
+
+.product-stock {
+  font-size: .9rem;
+  color: #7f8fa6;
+  margin-top: auto;}
+i {
+    margin-right: 5px;
+  }
+
+  .product-price {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
