@@ -1,160 +1,167 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import user from "./assets/user.png";
 import logout from "./assets/logout.png";
 import "./App.css";
-class App extends React.Component {
-  render() {
-    const mystyle = {
-      fontFamily: "Kanit",
-    };
+import Home from "./contents/Home";
+import Food from "./contents/Food";
+import Fruit from "./contents/Fruit";
+import Wares from "./contents/Wares";
+import Vegetable from "./contents/Vegetable";
+import Navbar from './components/Navbar'
+import ProductsPopular from "./contents/ProductsPopular";
+function App() {
 
-    return (
-      <div style={mystyle}>
-        {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light  nav-justified ">
-          <a class="navbar-brand nav-link disabled" href="#">
-            POINT OF MONEY
+  const mystyle = {
+    fontFamily: "Kanit",
+
+  }
+
+
+  return (
+    <div style={mystyle}>
+      {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
+      <nav class="navbar navbar-expand-lg navbar-light bg-light  nav-justified ">
+        <a class="navbar-brand nav-link disabled" href="#">
+          POINT OF MONEY
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto ">
-              <li class="nav-item active">
-                <a class="nav-item nav-link " href="#">
-                  หน้าร้าน
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto ">
+            <li class="nav-item active">
+              <a class="nav-item nav-link " href="#">
+                หน้าร้าน
                 </a>
-              </li>
+            </li>
 
-              <li class="nav-item active">
-                <a class="nav-item nav-link " href="#">
-                  คลังสินค้า
+            <li class="nav-item active">
+              <a class="nav-item nav-link " href="#">
+                คลังสินค้า
                 </a>
-              </li>
+            </li>
 
-              <li class="nav-item active">
-                <a class="nav-item nav-link " href="#">
-                  รายงานการขาย
+            <li class="nav-item active">
+              <a class="nav-item nav-link " href="#">
+                รายงานการขาย
                 </a>
-              </li>
+            </li>
 
-              <li class="nav-item dropdown">
-                {/* ถ้าของไม่หมด
+            <li class="nav-item dropdown">
+              {/* ถ้าของไม่หมด
                  <a class="nav" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" style={{color: '#807b7b'}}>
                 <i class="fa fa-bell"><span class="badge badge-secondary">0</span></i></a>*/}
 
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-bell">
-                    <span class="badge badge-danger">10</span>
-                  </i>
-                </a>
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fa fa-bell">
+                  <span class="badge badge-danger">10</span>
+                </i>
+              </a>
 
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#" style={{ color: "red" }}>
-                    สินค้าหมด! : ถ้วย
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#" style={{ color: "red" }}>
+                  สินค้าหมด! : ถ้วย
                   </a>
-                  <a class="dropdown-item" href="#" style={{ color: "red" }}>
-                    สินค้าหมด! : ชาม
+                <a class="dropdown-item" href="#" style={{ color: "red" }}>
+                  สินค้าหมด! : ชาม
                   </a>
-                </div>
-              </li>
+              </div>
+            </li>
 
-              <li class="nav-item dropdown">
-                <a
-                  class="nav "
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                >
-                  <img src={user} alt="user" width="50" height="50" />
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">
-                    แก้ไขโปรไฟล์
+            <li class="nav-item dropdown">
+              <a
+                class="nav "
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+              >
+                <img src={user} alt="user" width="50" height="50" />
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">
+                  แก้ไขโปรไฟล์
                   </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                    ตั้งค่าร้านค้า
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  ตั้งค่าร้านค้า
                   </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" style={{ color: "red" }}>
-                    <img src={logout} alt="user" width="20" height="20" />{" "}
-                    <t></t>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" style={{ color: "red" }}>
+                  <img src={logout} alt="user" width="20" height="20" />{" "}
+                  <t></t>
                     ออกจากระบบ
                   </a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-        <br></br>
+      <br></br>
 
-        <div class="container-fluid">
-          <div class="row">
+      <div class="container-fluid">
+        <div class="row">
+          <Router>
             <div class="col-lg-2  ">
               <ul class="nav flex-column nav-tabs">
-              <li>
+                <li>
                   <h5>
                     ประเภทสินค้า
                   </h5>
+                </li >
+
+                <Navbar />
+                <li class="nav-item">
+                  <Route exact path="/" >
+
+                  </Route>
+
+                </li>
+                <li class="nav-item">
+                  <Route exact path="/ProductsPopular"  >
+
+                  </Route>
+
+                </li>
+                <li>
+                  <Route exact path="/Food"  >
+
+                  </Route>
                 </li>
                 
-                <li>
-                  <a class="buttom btn-block" href="#">
-                    สินค้ายอดนิยม
-                  </a>
-                </li>
+                <li class="nav-item">
+                  <Route exact path="/Vegetable"  >
 
-                <li>
-                  <a class="buttom btn-block" href="#">
-                    อาหาร
-                  </a>
+                  </Route>
                 </li>
                 <li class="nav-item">
-                  <a class="buttom btn-block" href="#">
-                    อาหารสด
-                  </a>
+                  <Route exact path="/Fruit"  >
+
+                  </Route>
                 </li>
-                <li class="nav-item">
-                  <a class="buttom btn-block" href="#">
-                    ผัก
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="buttom btn-block" href="#">
-                    ผลไม้
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="buttom btn-block" href="#">
-                    ขนมอบ
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="buttom btn-block" href="#">
-                    ของใช้
-                  </a>
-                </li>
+             
+                
+            
               </ul>
             </div>
 
@@ -176,160 +183,109 @@ class App extends React.Component {
               </div>
 
               <br></br>
-              <div id="box2">
-                <div class="product">
-                  <img
-                    class="product-image"
-                    src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
-                    alt="DOS0fk.jpg"
-                    border="0"
-                  />
-                  <h7>ส้ม</h7> <br></br>
-                  <h8 class="product-price">£230</h8>
-                  <br></br>
-                  <span class="product-stock">
-                    <i class="fas fa-check-circle"></i> 20 in stock
-                  </span>
-                  <button type="button" class="btn btn-info btn-block" >
-                    BUY NOW <i class="fas fa-shopping-cart"></i>
+
+              <Route exact path="/" >
+                <Home />
+              </Route>
+              <Route exact path="/ProductsPopular" >
+                <ProductsPopular />
+              </Route>
+              <Route exact path="/Food"  >
+                <Food />
+              </Route>
+             
+              <Route exact path="/Vegetable"  >
+                <Vegetable />
+              </Route>
+             
+              <Route exact path="/Fruit"  >
+                <Fruit />
+              </Route>
+           
+           
 
 
-                  </button>
-                </div>
 
-                <div class="product">
-                  <img
-                    class="product-image"
-                    src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
-                    alt="DOS0fk.jpg"
-                    border="0"
-                  />
-                  <h7>แตงโม</h7> <br></br>
-                  <h8 class="product-price">£230</h8>
-                  <br></br>
-                  <span class="product-stock">
-                    <i class="fas fa-exclamation-triangle"></i>3 in stock
-                  </span>
-                  <button type="button" class="btn btn-info btn-block">
-                    BUY NOW <i class="fas fa-shopping-cart"></i>
-
-                  </button>
-                </div>
-
-                <div class="product">
-                  <img
-                    class="product-image"
-                    src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
-                    alt="DOS0fk.jpg"
-                    border="0"
-                  />
-                  <h7>ส้ม</h7> <br></br>
-                  <h8 class="product-price">£230</h8>
-                  <br></br>
-                  <span class="product-stock">
-                    <i class="fas fa-exclamation-triangle"></i> 20 in stock
-                  </span>
-                  <button type="button" class="btn btn-info btn-block">
-                    BUY NOW <i class="fas fa-shopping-cart"></i>
-                  </button>
-                </div>
-
-                <div class="product">
-                  <img
-                    class="product-image"
-                    src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
-                    alt="DOS0fk.jpg"
-                    border="0"
-                  />
-                  <h7>ส้ม</h7> <br></br>
-                  <h8 class="product-price">£230</h8>
-                  <br></br>
-                  <span class="product-stock">
-                    <i class="fas fa-exclamation-triangle"></i> 20 in stock
-                  </span>
-                  <button type="button" class="btn btn-info btn-block">
-                    BUY NOW <i class="fas fa-shopping-cart"></i>
-
-                  </button>
-                </div>
-              </div>
             </div>
+          </Router>
+          <div class="col-lg-3">
+            <div id="box">
 
-            <div class="col-lg-3">
-              <div id="box">
-                
-                  <br></br>
-                  <h6>รายการสั่งซื้อ</h6>
-                  <hr></hr>
+              <br></br>
+              <h6>รายการสั่งซื้อ</h6>
+              <hr></hr>
 
-                  <table class="table table-borderless table-sm">
-                  <thead>
+              <table class="table table-borderless table-sm">
+                <thead>
                   <tr>
                     <th scope="col">รายการ</th>
                     <th scope="col">ราคา</th>
                     <th scope="col"> จำนวน</th>
                     <th scope="col">ยกเลิก</th>
                   </tr>
-                  </thead>
-                  <tbody> 
+                </thead>
+                <tbody>
                   <tr>
-                  <td>ส้ม</td>
-                  <td>80</td>
-                  <td>2</td>
-                  <td><a href="#" style={{fontsize:"24px", color:"red"}}> <i class="fas fa-minus-circle"></i></a></td>
+                    <td>ส้ม</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle"></i></a></td>
                   </tr>
 
                   <tr>
-                  <td>ส้ม</td>
-                  <td>80</td>
-                  <td>2</td>
-                  <td><a href="#" style={{fontsize:"24px", color:"red"}}> <i class="fas fa-minus-circle"></i></a></td>
+                    <td>ส้ม</td>
+                    <td>80</td>
+                    <td>2</td>
+                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle"></i></a></td>
                   </tr>
-                 </tbody>
+                </tbody>
 
-                  <tr>
-                    <th >จำนวน</th>
-                    <th ></th>
-                    <th ></th>
-                    <th >4</th>
-                  </tr>
-                  
-                  <tr>
-                    <th >ภาษี</th>
-                    <th ></th>
-                    <th ></th>
-                    <th >20</th>
-                  </tr>
+                <tr>
+                  <th >จำนวน</th>
+                  <th ></th>
+                  <th ></th>
+                  <th >4</th>
+                </tr>
 
-                  <tr>
-                    <th >เงินทั้งหมด</th>
-                    <th ></th>
-                    <th ></th>
-                    <th >160</th>
-                  </tr>
-                  </table>
-                  <br></br>
+                <tr>
+                  <th >ภาษี</th>
+                  <th ></th>
+                  <th ></th>
+                  <th >20</th>
+                </tr>
 
-                  <button type="button" class="btn btn-danger btn-block" style={{borderradius: "20%"}}>
-                    ลบรายการทั้งหมด
+                <tr>
+                  <th >เงินทั้งหมด</th>
+                  <th ></th>
+                  <th ></th>
+                  <th >160</th>
+                </tr>
+              </table>
+              <br></br>
+
+              <button type="button" class="btn btn-danger btn-block" style={{ borderradius: "20%" }}>
+                ลบรายการทั้งหมด
                     </button>
-                   <button type="button" class="btn btn-success btn-block" style={{borderradius: "20%"}}>
-                   บันทึกการขาย
+              <button type="button" class="btn btn-success btn-block" style={{ borderradius: "20%" }}>
+                บันทึกการขาย
                     </button>
 
 
-
-                    <br></br>
-              </div>
 
               <br></br>
+
+
             </div>
-            
+
+            <br></br>
           </div>
+
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+
 
 export default App;
