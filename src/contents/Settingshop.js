@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-awesome-modal';
-
+import Topnav from '../components/Topnav'
 
 
 class Settingshop extends React.Component {
@@ -32,8 +32,9 @@ closeModal() {
     
 
     return (
-      <div style={mystyle}>
       
+      <div style={mystyle}>
+      <Topnav/>
         <br></br>
 
         <div class="container">
