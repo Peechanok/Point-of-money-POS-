@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Shop from "../components/Main";
 
 
 class Home extends Component {
@@ -9,7 +10,7 @@ class Home extends Component {
     };
 
     return (
-      
+      <Shop>
               <div id="box2">
                 <div class="product">
                   <img
@@ -87,6 +88,7 @@ class Home extends Component {
                   </button>
                 </div>
                 </div>
+                </Shop>
     );
   }
 }

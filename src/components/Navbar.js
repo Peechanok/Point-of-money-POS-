@@ -22,7 +22,7 @@ class Navbar extends Component {
     render() {
         return (
             <nav>
-                <ul class="nav flex-column nav-tabs">
+                <ul class="nav flex-column nav-tabs" >
                     <Navitems  item="หน้าแรก" tolink="/" activenav={this.activeitem} ></Navitems>
                     <Navitems item="สินค้ายอดนิยม" tolink="/ProductsPopular" activenav={this.activeitem}></Navitems>
                     <Navitems item="อาหาร" tolink="/Food" activenav={this.activeitem}></Navitems>
