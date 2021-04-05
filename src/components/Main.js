@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import Navbar from '../components/Navbar'
-import Topnav from '../components/Topnav'
+import Navbar from './Navbar'
+import Topnav from './Topnav'
 
 function App({ children }) {
 
@@ -20,39 +20,39 @@ function App({ children }) {
 
       <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2  ">
-              <ul class="nav flex-column nav-tabs">
-                <li>
-                  <h5>
-                    ประเภทสินค้า
+          <div class="col-lg-2  ">
+            <ul class="nav flex-column nav-tabs">
+              <li>
+                <h5>
+                  ประเภทสินค้า
                   </h5>
-                </li >
-                <Navbar />   
-              </ul>
+              </li >
+              <Navbar />
+            </ul>
+          </div>
+
+          <div class="col-lg-6 ">
+            <div class="input-group">
+              <input
+                id="searchBox"
+                type="text"
+                class="form-control"
+                placeholder="ค้นหาสินค้าได้ที่นี่"
+                name="inputSearch"
+                value=""
+              ></input>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-info" value="search" onclick="">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="col-lg-6 ">
-              <div class="input-group">
-                <input
-                  id="searchBox"
-                  type="text"
-                  class="form-control"
-                  placeholder="ค้นหาสินค้าได้ที่นี่"
-                  name="inputSearch"
-                  value=""
-                ></input>
-                <div class="input-group-append">
-                  <button type="button" class="btn btn-info" value="search" onclick="">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-
-              <br></br>
+            <br></br>
             {children}
 
-              
-            </div>
+
+          </div>
           <div class="col-lg-3">
             <div id="box">
 
