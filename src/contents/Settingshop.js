@@ -9,32 +9,32 @@ class Settingshop extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        visible : false
+      visible: false
     }
-}
+  }
 
-openModal() {
+  openModal() {
     this.setState({
-        visible : true
+      visible: true
     });
-}
+  }
 
-closeModal() {
+  closeModal() {
     this.setState({
-        visible : false
+      visible: false
     });
-}
+  }
   render() {
     const mystyle = {
       fontFamily: "Kanit",
     };
 
-    
+
 
     return (
-      
+
       <div style={mystyle}>
-      <Topnav/>
+        <Topnav />
         <br></br>
 
         <div class="container">
@@ -127,87 +127,87 @@ closeModal() {
 
               <br></br>
 
-              <a class="btn btn-outline-primary btn-block" href="#"  onClick={() => this.openModal()}>
-              <i class="fas fa-user-plus"></i></a>
-                
+              <a class="btn btn-outline-primary btn-block" href="#" onClick={() => this.openModal()}>
+                <i class="fas fa-user-plus"></i></a>
+
               <section>
-               
-              <Modal visible={this.state.visible} width="500" height="400" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-              <a href="javascript:void(0);" onClick={() => this.closeModal()} style={{ padding: "2%" }}><i class="fas fa-times" ></i></a>
-                     <div style={{ padding: "5%", alignItems:"center" }}>     
-                        <h4>เพิ่มผู้ใช้</h4>
-                         <hr></hr><br></br>
-                       
-                        <form>  
-                        <table class="table table-borderless table-sm">
-                         <div class="form-group"> 
-                         
-                         
-                         <tr>
+
+                <Modal visible={this.state.visible} width="500" height="400" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                  <a href="javascript:void(0);" onClick={() => this.closeModal()} style={{ padding: "2%" }}><i class="fas fa-times" ></i></a>
+                  <div style={{ padding: "5%", alignItems: "center" }}>
+                    <h4>เพิ่มผู้ใช้</h4>
+                    <hr></hr><br></br>
+
+                    <form>
+                      <table class="table table-borderless table-sm">
+                        <div class="form-group">
+
+
+                          <tr>
                             <th>ผู้ใช้งาน</th>
-                            <th> 
-                            <select class="custom-select ">
+                            <th>
+                              <select class="custom-select ">
                                 <option selected>ผู้ใช้</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                               </select>
                             </th>
-                           </tr>
+                          </tr>
 
-                           
-                           <tr>
+
+                          <tr>
                             <th>ตำแหน่ง</th>
-                            <th> 
-                            <select class="custom-select">
+                            <th>
+                              <select class="custom-select">
                                 <option selected>ตำแหน่ง</option>
                                 <option value="1">ผู้จัดการ</option>
                                 <option value="2">แคร์เซียร์</option>
                                 <option value="3">ผู้จัดการสินค้า</option>
                               </select>
                             </th>
-                           </tr>
-                         
-                       
+                          </tr>
 
-                           <tr>
+
+
+                          <tr>
                             <th>ชื่อผู้ใช้</th>
                             <th> <input
-                            type="text"
-                            class="form-control"
-                            placeholder="user"
-                            required
-                          ></input></th>
+                              type="text"
+                              class="form-control"
+                              placeholder="user"
+                              required
+                            ></input></th>
 
-                           </tr>
+                          </tr>
 
-                           <tr>
+                          <tr>
                             <th>รหัสผ่าน</th>
                             <th> <input
-                            type="password"
-                            class="form-control"
-                            placeholder="ต้องมีอย่างน้อย 8 ตัว"
-                            required
-                          ></input></th>
+                              type="password"
+                              class="form-control"
+                              placeholder="ต้องมีอย่างน้อย 8 ตัว"
+                              required
+                            ></input></th>
 
-                           </tr>
+                          </tr>
 
-                          
 
-                           <br></br>
-                           <button class="btn btn-info btn-block" type="submit">
+
+                          <br></br>
+                          <button class="btn btn-info btn-block" type="submit">
                             ยืนยัน
                           </button>
                           <br></br><br></br>
-                          </div>
-                        </table>
-                        </form>
-                  
-                       
-                   
-                    </div>
+                        </div>
+                      </table>
+                    </form>
+
+
+
+                  </div>
                 </Modal>
-                </section>
+              </section>
 
 
               <br></br>
@@ -227,7 +227,7 @@ closeModal() {
                   <td>
                     {" "}
                     <a class="btn btn-outline-warning btn-block" href="#">
-                    <i class="fas fa-sliders-h"></i>
+                      <i class="fas fa-sliders-h"></i>
 
 
                     </a>
@@ -246,7 +246,7 @@ closeModal() {
                   <td>
                     {" "}
                     <a class="btn btn-outline-warning btn-block" href="#">
-                    <i class="fas fa-sliders-h"></i>
+                      <i class="fas fa-sliders-h"></i>
 
 
                     </a>
