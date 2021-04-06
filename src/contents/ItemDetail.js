@@ -34,7 +34,7 @@ function ItemDetail(props) {
 
           <div class="col-lg " style={{ maxWidth: '80%' }}>
             <br></br>
-            <div style={{ display: 'flex', width: '50%' }}>
+            <div style={{ display: 'flex', width: '90%' }}>
               <div style={{ display: '-webkit-box' }}>
                 <div style={{ width: 500, height: 500 }}>
                   <img
@@ -45,7 +45,7 @@ function ItemDetail(props) {
                   />
                 </div>
               </div>
-              <div style={{ display: 'flex', flex: '1 1 auto', width: '100%' }}>
+              <div style={{ display: 'flex', flex: '1 1 auto', width: '50%' }}>
                 <div style={{ display: 'block', width: '100%', display: 'flex', flexDirection: 'column', padding: '1.25rem 2.1875rem 0 1.25rem' }}>
                   <h7 style={{ fontWeight: 500, fontSize: '1.25rem', overflow: 'visible', overflowWrap: 'break-word' }}>ข้าวผัดต้มยำ</h7> <br></br>
                   <div style={{ display: 'block', background: "rgb(245 245 245)" }}>
