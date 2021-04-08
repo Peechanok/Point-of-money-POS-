@@ -46,7 +46,7 @@ function Navigations() {
             <Nav.Link href="/">หน้าร้าน</Nav.Link>
             <Nav.Link href=""></Nav.Link>
 
-            <Nav.Link href="#link">คลังสินค้า</Nav.Link>
+            <Nav.Link href="/Warehouse">คลังสินค้า</Nav.Link>
             <Nav.Link href=""></Nav.Link>
 
             <Nav.Link href="#link">ยอดขาย</Nav.Link>
