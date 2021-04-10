@@ -69,5 +69,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-node server.js  รัน server port 8080
+คำ่ง  node server.js  เพื่อ รัน server port 8080
+
+ดูข้อมูลทั้งหมด
+http://localhost:8080/api/product/all
+http://localhost:8080/api/type_product/all
+http://localhost:8080/api/user/all
 
