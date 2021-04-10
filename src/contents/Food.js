@@ -3,6 +3,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Shop from "../components/Main";
 
 class Food extends Component {
+//ไปต่อไม่เป็น
+//   constructor(props) {
+//     super(props);
+//     this.state = { apiResponse: "" };
+// }
+
+// callAPI() {
+//     fetch("http://localhost:8080/api/product/all")
+//         .then(res => res.text())
+//         .then(res => this.setState({ apiResponse: res }));
+// }
+
+// componentWillMount() {
+//     this.callAPI();
+// }
   render() {
     const mystyle = {
       fontFamily: "Kanit",
@@ -60,6 +75,10 @@ class Food extends Component {
             <h7>หมูทอดกระเทียม</h7> <br></br>
             <h8 class="product-price">£230</h8>
             <br></br>
+       {/* A JSX comment    <!--<p className="App-intro">;{this.state.apiResponse}</p>--> */}
+
+
+
             <span class="product-stock">
               <i class="fas fa-exclamation-triangle"></i> 20 in stock
                   </span>
@@ -67,7 +86,9 @@ class Food extends Component {
               BUY NOW <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
+         
         </div>
+        
       </Shop>
     );
   }
