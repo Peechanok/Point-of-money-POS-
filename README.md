@@ -72,19 +72,19 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### พิมพ์  node server.js  เพื่อ รัน server port 8080
 
 ## ดูข้อมูลทั้งหมด
-**http://localhost:8080/api/product/all.
-**http://localhost:8080/api/type_product/all.
-**http://localhost:8080/api/user/all.
+# http://localhost:8080/api/product/all.
+# http://localhost:8080/api/type_product/all.
+# http://localhost:8080/api/user/all.
 
 ## ดูข้อมูลตาม id
-**http://localhost:8080/api/product/ตามด้วยตัวเลข.
-**http://localhost:8080/api/type_product/ตามด้วยตัวเลข.
-**http://localhost:8080/api/user/ตามด้วยตัวเลข.
+# http://localhost:8080/api/product/ตามด้วยตัวเลข.
+# http://localhost:8080/api/type_product/ตามด้วยตัวเลข.
+# http://localhost:8080/api/user/ตามด้วยตัวเลข.
  
 ## เรา post  ข้อมูลโดยใช้ post man  เมทตอท post
-**http://localhost:8080/api/product/.
-**http://localhost:8080/api/type_product/.
-**http://localhost:8080/api/user/.
+# http://localhost:8080/api/product/.
+# http://localhost:8080/api/type_product/.
+# http://localhost:8080/api/user/.
 
 
 
