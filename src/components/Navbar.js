@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
 import Navitems from './Navitems'
 
+import axios from 'axios';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            'NavItemActive': ''
+            'NavItemActive': '',
+            product_type:[]
         }
     }
+    componentDidMount() {
+        axios.get(`http://localhost:8080/api/type_product/all`)
+            .then(res => {
+                this.setState({ product_type: res.data });
+            })
+
+    }
+
+    renderTableData() {
+        return this.state.product_type.map((product_type, index) => {
+          const { id, type_name, type_description, createdAt, updatedAt } = product_type
+          console.log(id, type_name, type_description, createdAt, updatedAt)
+          return (
+            <Navitems item={type_name} tolink= {`/Product/${type_name}`} typeid= {id} activenav={this.activeitem}></Navitems>
+          )
+        })
+      }
 
     activeitem = (item) => {
         if (this.state.NavItemActive.length > 0) {
@@ -24,11 +43,7 @@ class Navbar extends Component {
             <nav>
                 <ul class="nav flex-column nav-tabs" >
                     <Navitems item="หน้าแรก" tolink="/" activenav={this.activeitem} ></Navitems>
-                    <Navitems item="สินค้ายอดนิยม" tolink="/ProductsPopular" activenav={this.activeitem}></Navitems>
-                    <Navitems item="อาหาร" tolink="/Food" activenav={this.activeitem}></Navitems>
-                    <Navitems item="ผัก" tolink="/Vegetable" activenav={this.activeitem}></Navitems>
-                    <Navitems item="ผลไม้" tolink="/Fruit" activenav={this.activeitem}></Navitems>
-                    <Navitems item="ของใช้" tolink="/Wares" activenav={this.activeitem}></Navitems>
+                    {this.renderTableData()}
                 </ul>
             </nav>
         )

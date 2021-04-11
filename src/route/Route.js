@@ -11,6 +11,7 @@ import Settingshop from "../contents/Settingshop";
 import ItemDetail from "../contents/ItemDetail";
 import EditItem from "../contents/EditItem";
 import Warehouse from "../contents/Warehouse";
+import Product from "../contents/Product";
 
 class Routing extends Component {
     render() {
@@ -27,6 +28,7 @@ class Routing extends Component {
                     <Route exact path={"/ItemDetail/:itemid"} component={ItemDetail} />
                     <Route exact path={"/EditItem/:itemid"} component={EditItem} />
                     <Route exact path={"/Warehouse"} component={Warehouse} />
+                    <Route exact path={"/Product/:product_type"} component={Product} />
                 </Router>
             </div>
         );

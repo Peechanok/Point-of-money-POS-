@@ -9,15 +9,20 @@ import axios from 'axios';
 
 class Warehouse extends Component {
     constructor(props) {
-        super(props) 
-        this.state = { 
-          product: []
+        super(props)
+        this.state = {
+            product: [],
+            product_type:[]
         }
-      }
+    }
     componentDidMount() {
         axios.get(`http://localhost:8080/api/product/all`)
             .then(res => {
                 this.setState({ product: res.data });
+            })
+        axios.get(`http://localhost:8080/api/type_product/all`)
+            .then(res => {
+                this.setState({ product_type: res.data });
             })
 
     }
@@ -29,8 +34,16 @@ class Warehouse extends Component {
 
     renderTableData() {
         return this.state.product.map((product, index) => {
+            var i= 0
+            var type =""
             const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
             console.log(id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt)
+            for(i = 0;i<this.state.product_type.length;i++){
+                if(this.state.product_type[i].id == type_product_id){
+                    type = this.state.product_type[i].type_name
+                    break;
+                }
+            }
             return (
                 <tr key={id}>
                     <td style={{ width: 100 }}>{id}</td>
@@ -41,7 +54,7 @@ class Warehouse extends Component {
                         border="0"
                     /></td>
                     <td >{product_name}</td>
-                    <td>{type_product_id}</td>
+                    <td>{type}</td>
                     <td>20</td>
                     <td>{product_price}</td>
                     <td style={{ width: 100 }}><Link class='btn btn-outline-warning btn-block' to={{ pathname: `/EditItem/${1}` }}><i class="fas fa-edit"></i></Link></td>
@@ -52,7 +65,7 @@ class Warehouse extends Component {
         })
     }
     render() {
-
+        console.log(this.state.product_type)
         return (
             <div style={this.mystyle}>
                 {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
