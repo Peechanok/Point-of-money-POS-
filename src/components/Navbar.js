@@ -8,7 +8,7 @@ class Navbar extends Component {
         super(props);
         this.state = {
             'NavItemActive': '',
-            product_type:[]
+            product_type: []
         }
     }
     componentDidMount() {
@@ -21,13 +21,12 @@ class Navbar extends Component {
 
     renderTableData() {
         return this.state.product_type.map((product_type, index) => {
-          const { id, type_name, type_description, createdAt, updatedAt } = product_type
-          console.log(id, type_name, type_description, createdAt, updatedAt)
-          return (
-            <Navitems item={type_name} tolink= {`/Product/${type_name}`} typeid= {id} activenav={this.activeitem}></Navitems>
-          )
+            const { id, type_name, type_description, createdAt, updatedAt } = product_type
+            return (
+                <Navitems item={type_name} tolink={`/Product/${type_name}`} typeid={id} activenav={this.activeitem}></Navitems>
+            )
         })
-      }
+    }
 
     activeitem = (item) => {
         if (this.state.NavItemActive.length > 0) {

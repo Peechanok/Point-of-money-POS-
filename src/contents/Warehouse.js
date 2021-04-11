@@ -65,7 +65,6 @@ class Warehouse extends Component {
         })
     }
     render() {
-        console.log(this.state.product_type)
         return (
             <div style={this.mystyle}>
                 {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}

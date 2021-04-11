@@ -27,7 +27,6 @@ class Product extends Component {
     }
     return this.state.product.map((product, index) => {
       const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
-      console.log(type_product_id, this.state.type_id)
       if(this.state.type_id == type_product_id){
         return (
             <Link to={{ pathname: `/ItemDetail/${id}` }}>
@@ -60,8 +59,6 @@ class Product extends Component {
     const mystyle = {
       fontFamily: "Kanit",
     };
-    
-    console.log(this.state.product)
     return (
       <Shop>
         <div id="box2">

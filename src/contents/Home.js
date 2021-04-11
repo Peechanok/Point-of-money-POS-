@@ -7,22 +7,21 @@ import axios from 'axios';
 
 class Home extends Component {
   constructor(props) {
-    super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-    this.state = { //state is by default an object
+    super(props)
+    this.state = {
       product: []
     }
   }
   componentDidMount() {
     axios.get(`http://localhost:8080/api/product/all`)
       .then(res => {
-        this.setState({ product: res.data});
+        this.setState({ product: res.data });
       })
-      
+
   }
   renderTableData() {
     return this.state.product.map((product, index) => {
       const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
-      console.log(id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt)
       return (
         <Link to={{ pathname: `/ItemDetail/${id}` }}>
           <div class="product">
@@ -53,7 +52,6 @@ class Home extends Component {
     const mystyle = {
       fontFamily: "Kanit",
     };
-    console.log(this.state.product)
     return (
       <Shop>
         <div id="box2">
