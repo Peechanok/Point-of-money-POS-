@@ -12,7 +12,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
-    "mdbreact": "^4.6.1",
+    "mdbreact": "^4.27.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "popper.js": "^1.16.1",

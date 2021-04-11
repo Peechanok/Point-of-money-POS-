@@ -37,7 +37,14 @@ db.sequelize.sync({ force: false }).then(() => {
 // });
 
 
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header('Access-Control-Allow-Methods','POST, GET, PUT, PATCH, DELETE, OPTIONS')
+  next()
+})
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
 
 
 
