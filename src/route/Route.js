@@ -18,7 +18,7 @@ class Routing extends Component {
         return (
             <div>
                 <Router>
-                    <Route exact path={"/"} component={Home} />
+                    <Route exact path={"/Product"} component={Home} />
                     <Route exact path={"/Food"} component={Food} />
                     <Route exact path={"/Fruit"} component={Fruit} />
                     <Route exact path={"/Wares"} component={Wares} />
