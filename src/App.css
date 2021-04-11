@@ -92,7 +92,7 @@ li{
   width: 220px;
   display: block;
   padding: 6px;
-  height: 320px;
+  height: 340px;
   position: relative;
   float: left;
   margin-right: 20px;
@@ -100,6 +100,7 @@ li{
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   cursor: pointer;
+  border-radius:10px;
 }
 
 .product:hover {
@@ -110,6 +111,7 @@ li{
 
 
 .product-image {
+  border-radius:10px;
   transition:0.5s;
   /* background: whitesmoke; */
 /* 
