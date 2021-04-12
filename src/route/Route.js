@@ -39,7 +39,7 @@ class Routing extends Component {
                     <Route exact  path={"/Login"} component={Login} />
                     <Route  exact path={"/Registers"} component={Registers} />
                     <Route  exact path={"/Login"} component={Start} />
-                    <Route exact path={"/Settingshop"} component={Settingshop} />
+                   
                     <Route exact path={"/AddProduct"} component={AddProduct} />
                     <Route exact path={"/AddType"} component={AddType} />
                     <Route exact path={"/Dashboard"} component={Dashboard} />
