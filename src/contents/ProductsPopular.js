@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Shop from "../components/Main";
 
 class ProductsPopular extends Component {
   render() {
@@ -9,7 +9,7 @@ class ProductsPopular extends Component {
     };
 
     return (
-      
+      <Shop>
               <div id="box2">
                 <div class="product">
                   <img
@@ -106,6 +106,7 @@ class ProductsPopular extends Component {
                   </button>
                 </div>
                 </div>
+                </Shop>
     );
   }
 }
