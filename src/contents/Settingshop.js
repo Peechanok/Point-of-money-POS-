@@ -1,265 +1,313 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Modal from 'react-awesome-modal';
-import Topnav from '../components/Topnav'
+import Modal from "react-awesome-modal";
+import Topnav from "../components/Topnav";
+import "../App.css";
+import SweetAlert from 'react-bootstrap-sweetalert';
+import childe from "../assets/childe.jpg";
+import { Link } from "react-router-dom";
 
 
 class Settingshop extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
-    }
+      visible: false,
+      status: false,
+      alert: null,
+    };
   }
 
-  openModal() {
+  openAddEmpolyee() {
     this.setState({
-      visible: true
+      visible: true,
     });
   }
 
-  closeModal() {
+  closeAddEmpolyee() {
     this.setState({
-      visible: false
+      visible: false,
     });
+  }
+
+  openDesEmpolyee() {
+    this.setState({
+      status: true,
+    });
+  }
+
+  closeDesEmpolyee() {
+    this.setState({
+      status: false,
+    });
+  }
+
+  deleteThisGoal() {
+    const getAlert = () => (
+      <SweetAlert 
+        warning 
+        showCancel
+        showCloseButton
+        confirmBtnText="Yes, delete it!"
+        confirmBtnBsStyle="danger"
+        title="Are you sure?"
+        onConfirm={() => this.hideAlert()}
+        onCancel={() => this.hideAlert()}
+        cancelBtnBsStyle="light"     
+      >
+        ถ้าลบแล้วข้อมูลจะไม่สามารถกู้คืนได้
+      </SweetAlert>
+    );
+
+    this.setState({
+      alert: getAlert()
+    });
+  }
+
+  hideAlert() {
+    console.log('Hiding alert...');
+    this.setState({
+      alert: null
+    });
+
   }
   render() {
     const mystyle = {
       fontFamily: "Kanit",
     };
 
-
-
     return (
-
       <div style={mystyle}>
         <Topnav />
         <br></br>
+    
 
         <div class="container">
-          <div class="row">
-            <div class="col  ">
-              <h4>ตั้งค่าร้านค้า</h4>
+          <div class="col">
+            <h1 style={{ color: "#228B22" }}>พนักงาน</h1>
+            <h3 style={{ color: "#90EE90" }}>( Employee )</h3>
 
-              <form class="was-validated">
-                <table class="table table-borderless table-sm">
-                  <tbody>
-                    <div class="form-group">
-                      <tr>
-                        <th>ชื่อร้าน</th>
-                        <th>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Shopee"
-                            required
-                          ></input>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>สาขา</th>
-                        <th>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="9"
-                            required
-                          ></input>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>เบอร์โทรศัพท์ร้าน</th>
-                        <th>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="123456789"
-                            required
-                          ></input>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>ภาษีมูลค่าเพิ่ม</th>
-                        <th>
-                          <input
-                            type="number"
-                            min="1"
-                            max="50"
-                            step="1"
-                            placeholder="7"
-                            required
-                          ></input>
-                          %
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>ค่าบริการ</th>
-                        <th>
-                          <input
-                            type="number"
-                            min="1"
-                            max="50"
-                            step="1"
-                            placeholder="10"
-                            required
-                          ></input>
-                          %
-                        </th>
-                      </tr>
-                      <tr>
-                        <th></th>
-                        <th>
-                          {" "}
-                          <button class="btn btn-primary btn-block" type="submit">
-                            ยืนยัน
-                          </button>
-                        </th>
-                      </tr>
-                    </div>
-                  </tbody>
-                </table>
-              </form>
+            <div
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "right",
+              }}
+            >
+              <Link
+                style={{
+                  borderRadius: "50%",
+                  width: "50px",
+                  height: "50px",
+                }}
+                class="btn buttom "
+                onClick={() => this.openAddEmpolyee()}
+              >
+                <i class="fas fa-user-plus"></i>
+              </Link>
             </div>
 
-            <div class="col">
-              <h4>พนักงาน</h4>
+            <section>
+              <Modal
+                visible={this.state.visible}
+                width="500"
+                height="450"
+                effect="fadeInUp"
+                onClickAway={() => this.closeAddEmpolyee()}
+              >
+                <a
+                  href="javascript:void(0);"
+                  onClick={() => this.closeAddEmpolyee()}
+                  style={{ padding: "2%" }}
+                >
+                  <i class="fas fa-times"></i>
+                </a>
+                <div
+                  style={{
+                    padding: "5%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <h4>
+                    <b>เพิ่มผู้ใช้</b>
+                  </h4>
+                  <h7>( Add users )</h7>
+                  <hr></hr>
+                  <br></br>
 
-              <br></br>
+                  <form>
+                    <table class="table table-borderless table-sm">
+                      <div class="form-group">
+                        <tr>
+                          <th>ผู้ใช้งาน</th>
+                          <th>
+                            <select class="custom-select">
+                              <option selected>ผู้ใช้</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </select>
+                          </th>
+                        </tr>
 
-              <a class="btn btn-outline-primary btn-block" href="#" onClick={() => this.openModal()}>
-                <i class="fas fa-user-plus"></i></a>
+                        <tr>
+                          <th>ตำแหน่ง</th>
+                          <th>
+                            <select class="custom-select">
+                              <option selected>ตำแหน่ง</option>
+                              <option value="1">ผู้จัดการ</option>
+                              <option value="2">แคร์เซียร์</option>
+                              <option value="3">ผู้จัดการสินค้า</option>
+                            </select>
+                          </th>
+                        </tr>
 
-              <section>
-
-                <Modal visible={this.state.visible} width="500" height="400" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                  <a href="javascript:void(0);" onClick={() => this.closeModal()} style={{ padding: "2%" }}><i class="fas fa-times" ></i></a>
-                  <div style={{ padding: "5%", alignItems: "center" }}>
-                    <h4>เพิ่มผู้ใช้</h4>
-                    <hr></hr><br></br>
-
-                    <form>
-                      <table class="table table-borderless table-sm">
-                        <div class="form-group">
-
-
-                          <tr>
-                            <th>ผู้ใช้งาน</th>
-                            <th>
-                              <select class="custom-select ">
-                                <option selected>ผู้ใช้</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                              </select>
-                            </th>
-                          </tr>
-
-
-                          <tr>
-                            <th>ตำแหน่ง</th>
-                            <th>
-                              <select class="custom-select">
-                                <option selected>ตำแหน่ง</option>
-                                <option value="1">ผู้จัดการ</option>
-                                <option value="2">แคร์เซียร์</option>
-                                <option value="3">ผู้จัดการสินค้า</option>
-                              </select>
-                            </th>
-                          </tr>
-
-
-
-                          <tr>
-                            <th>ชื่อผู้ใช้</th>
-                            <th> <input
+                        <tr>
+                          <th>ชื่อผู้ใช้</th>
+                          <th>
+                            {" "}
+                            <input
                               type="text"
                               class="form-control"
                               placeholder="user"
                               required
-                            ></input></th>
+                            ></input>
+                          </th>
+                        </tr>
 
-                          </tr>
-
-                          <tr>
-                            <th>รหัสผ่าน</th>
-                            <th> <input
+                        <tr>
+                          <th>รหัสผ่าน</th>
+                          <th>
+                            {" "}
+                            <input
                               type="password"
                               class="form-control"
                               placeholder="ต้องมีอย่างน้อย 8 ตัว"
                               required
-                            ></input></th>
+                            ></input>
+                          </th>
+                        </tr>
 
-                          </tr>
+                        <br></br>
+                        <a class="btn buttom btn-block" type="submit">
+                          ยืนยัน
+                        </a>
+                        <br></br>
+                        <br></br>
+                      </div>
+                    </table>
+                  </form>
+                </div>
+              </Modal>
+            </section>
 
+            <br></br>
 
-
-                          <br></br>
-                          <button class="btn btn-info btn-block" type="submit">
-                            ยืนยัน
-                          </button>
-                          <br></br><br></br>
-                        </div>
-                      </table>
-                    </form>
-
-
-
-                  </div>
-                </Modal>
-              </section>
-
-
-              <br></br>
-              <table class="table table-bordered">
+            <table
+              class="table table-bordered"
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              {" "}
+              <thead>
                 <tr>
                   <th>#</th>
-                  <th>รายชื่อ</th>
+                  <th style={{ width: '50%' }}>รายชื่อ</th>
                   <th>ตำแหน่ง</th>
-                  <th>แก้ไข</th>
-                  <th>ลบ</th>
+                  <th>รายละเอียด</th>
+                  <th>ลบข้อมูล</th>
                 </tr>
+              </thead>
+              <tbody>
+            
 
                 <tr>
-                  <td>1</td>
-                  <td>Adimin</td>
+                  <th>1</th>
+                  <td>Tartaglia </td>
                   <td>ผู้จัดการ</td>
                   <td>
                     {" "}
-                    <a class="btn btn-outline-warning btn-block" href="#">
-                      <i class="fas fa-sliders-h"></i>
-
-
-                    </a>
+                    <Link
+                      class="btn btn-outline-primary btn-block"
+                      onClick={() => this.openDesEmpolyee()}
+                    >
+                      <i class="fas fa-file-alt"></i>
+                    </Link>
                   </td>
+
                   <td>
                     {" "}
-                    <a class="btn btn-outline-danger btn-block" href="#">
-                      <i class="far fa-trash-alt"></i>
-                    </a>
+                    <Link 
+                      class="btn btn-outline-danger btn-block"
+                        onClick={() => this.deleteThisGoal()}
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </Link>
+                    {this.state.alert}
                   </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>อลิซ</td>
-                  <td>แคชเชียร์</td>
-                  <td>
-                    {" "}
-                    <a class="btn btn-outline-warning btn-block" href="#">
-                      <i class="fas fa-sliders-h"></i>
+              </tbody>
+            </table>
 
+            {/* SHOW INFORMATION OF EMPLOYEE */}
 
-                    </a>
-                  </td>
-                  <td>
-                    {" "}
-                    <a class="btn btn-outline-danger btn-block" href="#">
-                      <i class="far fa-trash-alt"></i>
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <section>
+              <Modal
+                visible={this.state.status}
+                width="500"
+                height="400"
+                effect="fadeInUp"
+                onClickAway={() => this.closeDesEmpolyee()}
+              >
+                <Link
+                  href="javascript:void(0);"
+                  onClick={() => this.closeDesEmpolyee()}
+                  style={{ padding: "2%" }}
+                >
+                  <i class="fas fa-times"></i>
+                </Link>
+                <div
+                  style={{
+                    padding: "5%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <h4>รายละเอียดพนักงาน</h4>
+                  <h7>( Employee profile )</h7>
+                  <hr></hr>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-5">
+                        <img src={childe} alt="" width="150" height="auto" />
+                      </div>
+                      <div class="col-7">
+                        <p>
+                          <b>ชื่อ :</b> Tartaglia <t></t>Childe
+                        </p>
+                        <p>
+                          <b>ตำแหน่ง :</b> (11th of the Eleven Fatui Harbingers)
+                        </p>
+
+                        <p>
+                          <b>username :</b> Tartaglia
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <br></br>
+                  <br></br>
+                </div>
+              </Modal>
+            </section>
+
+            {/* END SHOW  */}
           </div>
         </div>
       </div>

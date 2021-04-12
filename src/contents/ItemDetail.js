@@ -24,8 +24,8 @@ class ItemDetail extends Component {
 
   }
   renderTableData() {
-    const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = this.state.product //destructuring
-    console.log(id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt)
+    const { id, product_name, product_description, product_price,product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product //destructuring
+    console.log(id, product_name, product_description, product_price,product_number, product_picture, type_product_id, createdAt, updatedAt)
     return (
       <div class="col-lg " style={{ maxWidth: '80%' }}>
         <br></br>

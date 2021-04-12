@@ -41,7 +41,7 @@ class Navbar extends Component {
         return (
             <nav>
                 <ul class="nav flex-column nav-tabs" >
-                    <Navitems item="หน้าแรก" tolink="/Product" activenav={this.activeitem} ></Navitems>
+                    <Navitems item="หน้าแรก" tolink="/" activenav={this.activeitem} ></Navitems>
                     {this.renderTableData()}
                 </ul>
             </nav>

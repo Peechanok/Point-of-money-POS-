@@ -8,7 +8,7 @@ exports.create = (req, res) => {
   //res.send(req.body);
   const type_prod = {
     type_name: req.body.type_name,
-    type_description: req.body.product_description,
+    type_description: req.body.type_description,
    
     
     

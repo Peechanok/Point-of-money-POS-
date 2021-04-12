@@ -49,7 +49,7 @@ function Navigations() {
             <Nav.Link href="/Warehouse">คลังสินค้า</Nav.Link>
             <Nav.Link href=""></Nav.Link>
 
-            <Nav.Link href="#link">ยอดขาย</Nav.Link>
+            <Nav.Link href="/Dashboard">ยอดขาย</Nav.Link>
             <Nav.Link href=""></Nav.Link>
 
             {/* ถ้าของไม่หมด

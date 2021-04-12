@@ -26,7 +26,7 @@ class Product extends Component {
         this.setState({ type_id: this.props.location.query});
     }
     return this.state.product.map((product, index) => {
-      const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
+      const { id, product_name, product_description,product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
       if(this.state.type_id == type_product_id){
         return (
             <Link to={{ pathname: `/ItemDetail/${id}` }}>
@@ -41,7 +41,7 @@ class Product extends Component {
                 <h8 class="product-price">{product_price} ฿</h8>
                 <br></br>
                 <span class="product-stock">
-                  <i class="fas fa-check-circle"></i> 20 in stock
+                  <i class="fas fa-check-circle"></i> {product_number} in stock
                     </span>
                 <button type="button" class="btn btn-info btn-block" >
                   BUY NOW <i class="fas fa-shopping-cart"></i>

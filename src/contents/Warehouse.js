@@ -36,8 +36,8 @@ class Warehouse extends Component {
         return this.state.product.map((product, index) => {
             var i= 0
             var type =""
-            const { id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
-            console.log(id, product_name, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt)
+            const { id, product_name,product_number, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
+            console.log(id, product_name, product_description,product_number, product_price, product_picture, type_product_id, createdAt, updatedAt)
             for(i = 0;i<this.state.product_type.length;i++){
                 if(this.state.product_type[i].id == type_product_id){
                     type = this.state.product_type[i].type_name
@@ -55,7 +55,7 @@ class Warehouse extends Component {
                     /></td>
                     <td >{product_name}</td>
                     <td>{type}</td>
-                    <td>20</td>
+                    <td>{product_number}</td>
                     <td>{product_price}</td>
                     <td style={{ width: 100 }}><Link class='btn btn-outline-warning btn-block' to={{ pathname: `/EditItem/${1}` }}><i class="fas fa-edit"></i></Link></td>
                     <td style={{ width: 100 }}><Link class='btn btn-outline-danger btn-block' to={{ pathname: `/EditItem/${1}` }}><i class="fas fa-trash-alt"></i></Link></td>

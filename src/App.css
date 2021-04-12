@@ -3,6 +3,15 @@
   font-family: 'Kanit', sans-serif;
 }
 
+.uploadbutton{
+  width: "100px" !important;
+  height: "30px" !important;
+}
+.upload-image {
+  text-align: center;
+  font-family: 'Kanit', sans-serif;
+}
+
 h5{
   text-align: center;
 
