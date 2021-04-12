@@ -30,9 +30,9 @@ function Navigations() {
 
       {/* <Navbar defaultActiveKey="/" class="navbar navbar-expand-lg navbar-light bg-light  nav-justified "> */}
 
-      <Navbar defaultActiveKey="/" collapseOnSelect toggleable="lg" expand='sm' bg='light' variant='light' >
+      <Navbar defaultActiveKey="/Product" collapseOnSelect toggleable="lg" expand='sm' bg='light' variant='light' >
 
-        <Navbar.Brand href="/"> <img
+        <Navbar.Brand href="/Product"> <img
           alt=""
           src={goods}
           width="30"
@@ -43,7 +43,7 @@ function Navigations() {
         <Navbar.Collapse id="basic-navbar-nav">
 
           <Nav justified className="ml-auto" >
-            <Nav.Link href="/">หน้าร้าน</Nav.Link>
+            <Nav.Link href="/Product">หน้าร้าน</Nav.Link>
             <Nav.Link href=""></Nav.Link>
 
             <Nav.Link href="/Warehouse">คลังสินค้า</Nav.Link>
