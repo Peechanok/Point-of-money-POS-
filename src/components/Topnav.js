@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -11,7 +11,7 @@ import logout from "../assets/logout.png";
 import goods from "../assets/goods.png";
 
 import Home from "../contents/Home";
-
+import axios from 'axios';
 
 function Navigations() {
 
@@ -19,11 +19,33 @@ function Navigations() {
     fontFamily: "Kanit",
 
   }
-
+  const [warn, setWarn] = useState(0);
+  const [product, setproduct] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/product/all`)
+      .then(pro => {
+        if (JSON.stringify(product) != JSON.stringify(pro.data)) {
+          setproduct(pro.data);
+        }
+      })
+    warnset()
+  }, [product]);
   const navDropdownTitle = (<img src={user} alt="user" width="50" height="50" />);
 
-  const warning = (<i class="fa fa-bell"><span class="badge badge-danger">10</span></i>);
+  const warning = (<i class="fa fa-bell"><span class="badge badge-danger">{warn}</span></i>);
   const nowarning = (<i class="fa fa-bell"><span class="badge badge-secondary">0</span></i>);
+
+  const warnset = () => {
+    let count = 0
+    product.map((product) => {
+      if (product.product_number <= 20) {
+
+        count++
+        console.log(product.product_number, warn, warn + 1)
+      }
+      setWarn(warn + count)
+    })
+  }
 
   return (
     <div style={mystyle}>
@@ -58,8 +80,15 @@ function Navigations() {
 
 
             <NavDropdown title={warning} id="nav-dropdown">
-              <NavDropdown.Item style={{ color: "red" }}>  สินค้าหมด! : ถ้วย</NavDropdown.Item>
-              <NavDropdown.Item style={{ color: "red" }}>  สินค้าหมด! : ถ้วย</NavDropdown.Item>
+              {product.map((product) => {
+                if (product.product_number <= 0) {
+                  return <NavDropdown.Item style={{ color: "red" }}>  สินค้าหมด! : {product.product_name}</NavDropdown.Item>
+                }
+                else if (product.product_number <= 20) {
+                  return <NavDropdown.Item style={{ color: "orange" }}>  สินค้าใกล้หมด! : {product.product_name}</NavDropdown.Item>
+                }
+
+              })}
             </NavDropdown>
 
             <Nav.Link href=""></Nav.Link>

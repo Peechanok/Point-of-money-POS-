@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import Navbar from '../components/Navbar'
 import Topnav from '../components/Topnav'
+import axios from 'axios';
 
 function EditItem(props) {
     const { itemid } = props.match.params
@@ -10,6 +11,10 @@ function EditItem(props) {
     const [price, setPrice] = useState(230);
     const [stock, setStock] = useState(20);
     const [detail, setDetail] = useState("");
+    const [pic, setPic] = useState("");
+    const [type, setType] = useState("");
+    const [product, setproduct] = useState({});
+    const [product_type, setProduct_type] = useState([]);
 
     const nameChange = ({ name }) => {
         setName(name);
@@ -23,7 +28,42 @@ function EditItem(props) {
     const detailChange = ({ detail }) => {
         setDetail(detail);
     }
+    const picChange = ({ pic }) => {
+        setPic(pic);
+    }
+    const typeChange = ({ type }) => {
+        setType(type);
+    }
 
+    const setD = () => {
+        setName(product.product_name);
+        setPrice(product.product_price);
+        setStock(product.product_number);
+        setDetail(product.product_description);
+        setPic(product.product_picture);
+        setType(product.type_product_id);
+    }
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/product/${itemid}`)
+            .then(pro => {
+                if (JSON.stringify(product) != JSON.stringify(pro.data)) {
+                    setproduct(pro.data);
+                    console.log(pro.data)
+                }
+            })
+        console.log("hello")
+    }, [product]);
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/type_product/all`)
+            .then(res => {
+                if (JSON.stringify(product_type) != JSON.stringify(res.data)) {
+                    setProduct_type(res.data);
+                }
+            })
+    }, [product_type]);
+    useEffect(() => {
+        setD()
+    }, [product]);
 
     const mystyle = {
         fontFamily: "Kanit",
@@ -32,13 +72,13 @@ function EditItem(props) {
 
     return (
         <div style={mystyle}>
+
             {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
             <Topnav />
 
             <br></br>
             <form >
                 <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-lg-2  ">
                         </div>
@@ -70,7 +110,17 @@ function EditItem(props) {
                                             <input placeholder="0" style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, fontSize: '1.875rem', margin: 5 }} type="number" id="price" name="price" class='form-control' value={price} onChange={(price) => { priceChange(price) }} required />
                                         </div>
                                         <br></br>
-
+                                        <select>
+                                            {product_type.map((product_type) => {
+                                                if(product_type.id == product.type_product_id){
+                                                    return <option value={product_type.id} selected>{product_type.type_name}</option>
+                                                }
+                                                else{
+                                                    return <option value={product_type.id}>{product_type.type_name}</option>
+                                                }
+                                                
+                                            })}
+                                        </select>
                                         <br></br>
                                         <span class="product-stock">
                                             <i class="fas fa-check-circle"></i> <input
@@ -91,8 +141,8 @@ function EditItem(props) {
                                                 name="detail"
                                                 value={detail}
                                                 onChange={(detail) => { detailChange(detail) }}
-                                                style={{ display: 'block', padding: 3, margin: 5, overflow: 'visible', overflowWrap: 'break-word', width:'100%', }}
-                                                rows={15} 
+                                                style={{ display: 'block', padding: 3, margin: 5, overflow: 'visible', overflowWrap: 'break-word', width: '100%', }}
+                                                rows={15}
                                             />
                                         </div>
                                     </div>
