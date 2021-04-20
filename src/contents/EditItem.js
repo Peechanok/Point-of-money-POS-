@@ -48,10 +48,8 @@ function EditItem(props) {
             .then(pro => {
                 if (JSON.stringify(product) != JSON.stringify(pro.data)) {
                     setproduct(pro.data);
-                    console.log(pro.data)
                 }
             })
-        console.log("hello")
     }, [product]);
     useEffect(() => {
         axios.get(`http://localhost:8080/api/type_product/all`)
@@ -104,21 +102,42 @@ function EditItem(props) {
                                 </div>
                                 <div style={{ display: 'flex', flex: '1 1 auto', width: '50%' }}>
                                     <div style={{ display: 'block', width: '100%', display: 'flex', flexDirection: 'column', padding: '1.25rem 2.1875rem 0 1.25rem' }}>
-                                        <input placeholder="ชื่อสินค้า" style={{ fontWeight: 500, fontSize: '1.25rem', overflow: 'visible', overflowWrap: 'break-word' }} type="text" id="name" name="name" class='form-control' value={name} onChange={(name) => { nameChange(name) }} required /><br></br>
+                                        <input
+                                            placeholder="ชื่อสินค้า"
+                                            style={{ fontWeight: 500, fontSize: '1.25rem', overflow: 'visible', overflowWrap: 'break-word' }}
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            class='form-control'
+                                            value={name}
+                                            onChange={(name) => { nameChange(name) }}
+                                            required
+                                        />
+                                        <br></br>
                                         <div style={{ display: 'block', background: "rgb(245 245 245)" }}>
 
-                                            <input placeholder="0" style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, fontSize: '1.875rem', margin: 5 }} type="number" id="price" name="price" class='form-control' value={price} onChange={(price) => { priceChange(price) }} required />
+                                            <input
+                                                placeholder="0"
+                                                style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, fontSize: '1.875rem', margin: 5 }}
+                                                type="number"
+                                                id="price"
+                                                name="price"
+                                                class='form-control'
+                                                value={price}
+                                                onChange={(price) => { priceChange(price) }}
+                                                required
+                                            />
                                         </div>
                                         <br></br>
                                         <select>
                                             {product_type.map((product_type) => {
-                                                if(product_type.id == product.type_product_id){
+                                                if (product_type.id == product.type_product_id) {
                                                     return <option value={product_type.id} selected>{product_type.type_name}</option>
                                                 }
-                                                else{
+                                                else {
                                                     return <option value={product_type.id}>{product_type.type_name}</option>
                                                 }
-                                                
+
                                             })}
                                         </select>
                                         <br></br>

@@ -41,7 +41,6 @@ function Navigations() {
       if (product.product_number <= 20) {
 
         count++
-        console.log(product.product_number, warn, warn + 1)
       }
       setWarn(warn + count)
     })

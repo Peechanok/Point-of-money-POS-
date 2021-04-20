@@ -4,30 +4,60 @@ import Topnav from "../components/Topnav";
 import "../App.css";
 import SweetAlert from 'react-bootstrap-sweetalert';
 
+import axios from 'axios';
+
 class AddType extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       addType: null,
+      count: 0,
+      product_type: [],
+      type_name: '',
+      type_description: '',
     };
   }
 
+  onFormSubmit = (e) => {
+    
+
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:8080/api/type_product/all`)
+      .then(res => {
+        this.setState({ product_type: res.data });
+      })
+  }
 
   successThisGoal() {
+
     const getData = () => (
-      <SweetAlert 
-      success 
-      title="Success!" 
-      confirmBtnBsStyle="success"
-      onConfirm={() => this.hide()}     
+      <SweetAlert
+        success
+        title="Success!"
+        confirmBtnBsStyle="success"
+        onConfirm={() => this.hide()}
       >
         เพิ่มข้อมูลเรียบร้อย
       </SweetAlert>
     );
+    const product_type = {
+      type_name: this.state.type_name,
+      type_description: this.state.type_description,
 
+    };
+    axios.post(`http://localhost:8080/api/type_product/`, product_type)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      }).catch((error) => {
+        console.log(error)
+      });
     this.setState({
-      addType: getData()
+      addType: getData(),
+      product_type:[...this.state.product_type, product_type]
     });
   }
 
@@ -64,6 +94,7 @@ class AddType extends React.Component {
                 type="text"
                 class="form-control"
                 placeholder="ชื่อประเภทใหม่"
+                onChange={(type_name) => { this.setState({ type_name: type_name.target.value }); }}
                 required
               ></input>
 
@@ -86,29 +117,22 @@ class AddType extends React.Component {
               }}
             >
               <tr>
-                <th style={{ background:"#8FBC8F", color:"white"}}>#</th>
-                <th style={{ width: '70%' ,background:"#8FBC8F", color:"white"}}>ชื่อประเภท</th>
+                <th style={{ background: "#8FBC8F", color: "white" }}>#</th>
+                <th style={{ width: '70%', background: "#8FBC8F", color: "white" }}>ชื่อประเภท</th>
               </tr>
-
+              {this.state.product_type.map((product_type, index) => {
+                const { id, type_name, type_description, createdAt, updatedAt } = product_type
+                return (
+                  <tr>
+                    <td>{index+1}</td>
+                    <td>{type_name} </td>
+                  </tr>
+                )
+              })
+              }
               <tr>
-                <td>1</td>
-                <td>ของหวาน </td>
-              </tr>
-
-              <tr> 
-                <td >1</td>
-                <td >ของหวาน </td>
-              </tr>
-
-              <tr>
-                <td>1</td>
-                <td>ของหวาน </td>
-              </tr>
-
-            
-              <tr>
-                <th style={{ background:"#90EE90", color:"black"}}>จำนวนทั้งหมด</th>
-                <th style={{ background:"#90EE90", color:"black"}}>3 </th>
+                <th style={{ background: "#90EE90", color: "black" }}>จำนวนทั้งหมด</th>
+                <th style={{ background: "#90EE90", color: "black" }}>{this.state.product_type.length} </th>
               </tr>
             </table>
           </div>
