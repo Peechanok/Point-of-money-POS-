@@ -4,7 +4,7 @@ import Shop from "../components/Main";
 import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux';
-import { addToCart, removeFromCart , updateCartQuantity} from "../store/actions/cartActions";
+import { addToCart, removeFromCart, updateCartQuantity } from "../store/actions/cartActions";
 
 import axios from 'axios';
 
@@ -20,7 +20,7 @@ class Home extends Component {
     axios.get(`http://localhost:8080/api/product/all`)
       .then(res => {
         this.setState({ product: res.data, carts: this.props.cart });
-        
+
       })
 
   }
@@ -32,18 +32,18 @@ class Home extends Component {
     localStorage.setItem('cart', JSON.stringify(cart));
 
   }
-  addToCart=(product, quantity)=> {
+  addToCart = (product, quantity) => {
     const cart = this.props.cart.find(item => item.product.id === product.id);
-    if(cart){
-      this.props.updateCartQuantity(product.id, cart.quantity+1);
+    if (cart) {
+      this.props.updateCartQuantity(product.id, cart.quantity + 1);
     }
-    else{
+    else {
       this.props.addToCart(product, quantity);
       this.setState({ carts: [...this.props.cart] })
     }
-    
+
   }
- 
+
   renderTableData() {
     return this.state.product.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product

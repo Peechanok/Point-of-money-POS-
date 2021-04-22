@@ -23,7 +23,7 @@ const cartReducer = (state = initialState, action) => {
          item.quantity = action.payload.quantity;
          newCart.push(item);
          console.log(newCart)
-         
+
          return {
             ...state,
             cart: newCart

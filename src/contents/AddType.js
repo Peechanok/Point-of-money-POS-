@@ -20,7 +20,7 @@ class AddType extends React.Component {
   }
 
   onFormSubmit = (e) => {
-    
+
 
   }
 
@@ -57,7 +57,7 @@ class AddType extends React.Component {
       });
     this.setState({
       addType: getData(),
-      product_type:[...this.state.product_type, product_type]
+      product_type: [...this.state.product_type, product_type]
     });
   }
 
@@ -124,7 +124,7 @@ class AddType extends React.Component {
                 const { id, type_name, type_description, createdAt, updatedAt } = product_type
                 return (
                   <tr>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{type_name} </td>
                   </tr>
                 )

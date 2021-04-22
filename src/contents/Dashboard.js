@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
 
                           <td className="text-right">$23,789</td>
                         </tr>
-                        
+
                       </tbody>
                     </Table>
                   </CardBody>

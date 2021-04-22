@@ -4,7 +4,7 @@ import Shop from "../components/Main";
 import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux';
-import { addToCart, removeFromCart , updateCartQuantity} from "../store/actions/cartActions";
+import { addToCart, removeFromCart, updateCartQuantity } from "../store/actions/cartActions";
 
 import axios from 'axios';
 
@@ -32,16 +32,16 @@ class Product extends Component {
     localStorage.setItem('cart', JSON.stringify(cart));
 
   }
-  addToCart=(product, quantity)=> {
+  addToCart = (product, quantity) => {
     const cart = this.props.cart.find(item => item.product.id === product.id);
-    if(cart){
-      this.props.updateCartQuantity(product.id, cart.quantity+1);
+    if (cart) {
+      this.props.updateCartQuantity(product.id, cart.quantity + 1);
     }
-    else{
+    else {
       this.props.addToCart(product, quantity);
       this.setState({ carts: [...this.props.cart] })
     }
-    
+
   }
 
   renderTableData() {

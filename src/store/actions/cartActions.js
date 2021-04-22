@@ -1,10 +1,10 @@
-export const addToCart = (product,quantity) => {
+export const addToCart = (product, quantity) => {
 
     return {
         type: 'ADD_TO_CART',
         payload: {
             product,
-            quantity:quantity
+            quantity: quantity
         }
     }
 };
@@ -21,11 +21,11 @@ export const removeFromCart = (productId) => {
 
 export const updateCartQuantity = (productId, quantity) => {
 
-  return {
-      type: 'UPDATE_CART_QUANTITY',
-      payload: {
-          productId,
-          quantity: quantity
-      }
-  }
+    return {
+        type: 'UPDATE_CART_QUANTITY',
+        payload: {
+            productId,
+            quantity: quantity
+        }
+    }
 };

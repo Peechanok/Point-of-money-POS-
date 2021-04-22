@@ -20,7 +20,7 @@ class Warehouse extends Component {
         console.log(id);
         axios.delete(`http://localhost:8080/api/product/${id}`)  
             .then(res => {  
-            console.log(res);  
+            console.log(res);
             console.log(res.data);  
     
             const product = this.state.product.filter(product => product.id !== id);  

@@ -94,7 +94,7 @@ function EditItem(props) {
     }
 
     if (isRedirect == true) {
-      return <Redirect to='/Warehouse' />
+        return <Redirect to='/Warehouse' />
     }
 
     return (
