@@ -18,6 +18,16 @@ class Warehouse extends Component {
     }
     handleDelete(id){
         console.log(id);
+        axios.delete(`http://localhost:8080/api/product/${id}`)  
+            .then(res => {  
+            console.log(res);  
+            console.log(res.data);  
+    
+            const product = this.state.product.filter(product => product.id !== id);  
+            this.setState({ product : product });  
+        }).catch((error) => {
+            console.log(error.response)
+        })  
         this.hideAlert()
     }
 
@@ -72,8 +82,7 @@ class Warehouse extends Component {
         return this.state.product.map((product, index) => {
             var i = 0
             var type = ""
-            const { id, product_name, product_number, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
-            console.log(id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt)
+            const { id, product_name, product_number, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
             for (i = 0; i < this.state.product_type.length; i++) {
                 if (this.state.product_type[i].id == type_product_id) {
                     type = this.state.product_type[i].type_name
@@ -82,7 +91,7 @@ class Warehouse extends Component {
             }
             return (
                 <tr key={id}>
-                    <td style={{ width: 100 }}>{id}</td>
+                    <td style={{ width: 100 }}>{index+1}</td>
                     <td style={{ width: 100 }}><img
                         style={{ display: 'block', maxWidth: 100, maxHeight: 100 }}
                         src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
