@@ -16,7 +16,7 @@ class AddProduct extends React.Component {
     type_product_id: 1,
     product_type: [],
     addType: null,
-    isRedirect: false 
+    isRedirect: false
 
   }
 
@@ -27,7 +27,7 @@ class AddProduct extends React.Component {
         success
         title="Success!"
         confirmBtnBsStyle="success"
-        onConfirm={() => this.setState({isRedirect: true})}
+        onConfirm={() => this.setState({ isRedirect: true })}
       >
         เพิ่มข้อมูลเรียบร้อย
       </SweetAlert>
@@ -41,29 +41,25 @@ class AddProduct extends React.Component {
       product_number: this.state.product_number,
 
     };
-    axios.post(`http://localhost:8080/api/product/`,  product)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    }).catch((error) => {
-      console.log(error)
-  });
+    axios.post(`http://localhost:8080/api/product/`, product)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      }).catch((error) => {
+        console.log(error)
+      });
     this.setState({
       addType: getData(),
-      product_type:[...this.state.product_name, product]
+      product_type: [...this.state.product_name, product]
     });
   }
   hide() {
     console.log('Hiding alert...');
-   
+
     this.setState({
       addType: null
-     
+
     });
-    
-
-    
-
   }
 
   // onFormSubmit = (e) => {
@@ -87,7 +83,7 @@ class AddProduct extends React.Component {
   // }
 
   componentDidMount() {
-    
+
     axios.get(`http://localhost:8080/api/type_product/all`)
       .then(res => {
         this.setState({ product_type: res.data });
@@ -100,9 +96,9 @@ class AddProduct extends React.Component {
       fontFamily: "Kanit",
     };
     let isRedirect = this.state.isRedirect;
-      if(isRedirect == true){
-       return <Redirect to='/Warehouse' />
-     }
+    if (isRedirect == true) {
+      return <Redirect to='/Warehouse' />
+    }
     return (
       <div style={mystyle}>
         <Topnav />
@@ -114,76 +110,76 @@ class AddProduct extends React.Component {
             <h3 style={{ color: "#20B2AA" }}>( Add product )</h3>
             <br></br>
             <div id="box2" class="border border-dark rounded" style={{ padding: "10%", background: "#F5F5F5" }}>
-           
-                <div class="form-group">
-                  <label>ชื่อสินค้า</label>
-                  <input
-                    type="text"
-                    class="form-control border border-success"
-                    placeholder="Shopee"
-                    onChange={(name) => { this.setState({ product_name: name.target.value }); }}
-                    value={this.state.product_name}
-                    required
-                  ></input>
-                  <br></br>
-                  <label>ประเภท</label>
-                  <select
-                    class="custom-select  border border-primary"
-                    onChange={(id) => { this.setState({ type_product_id: id.target.value }); }}
-                  >
-                    {this.state.product_type.map((product_type) => {
-                      return <option value={product_type.id}>{product_type.type_name}</option>
-                    })}
-                  </select>
-                  <br></br> <br></br>
-                  <label>จำนวน</label>
-                  <input
-                    class="form-control border border-warning"
-                    style={{ width: "100%" }}
-                    type="number"
-                    min="1"
-                    max="1000"
-                    placeholder="1"
-                    onChange={(number) => { this.setState({ product_number: number.target.value }); }}
-                    value={this.state.product_number}
-                    required
-                  ></input>
-                  <br></br> <br></br>
-                  <label>ราคา</label>
-                  <input
-                    class="border border-primary"
-                    style={{ width: "100%" }}
-                    type="number"
-                    min="1"
-                    max="1000"
-                    placeholder="1"
-                    onChange={(price) => { this.setState({ product_price: price.target.value }); }}
-                    value={this.state.product_price}
-                    required
-                  ></input>
-                  <br></br>
-                  <br></br>
-                  <label for="">รูปสินค้า</label>
 
-                  <input
-                    class="form-control form-control-lg  border border-success"
-                    id="formFileLg"
-                    type="file"
-                    accept="image/*"
-                  />
+              <div class="form-group">
+                <label>ชื่อสินค้า</label>
+                <input
+                  type="text"
+                  class="form-control border border-success"
+                  placeholder="Shopee"
+                  onChange={(name) => { this.setState({ product_name: name.target.value }); }}
+                  value={this.state.product_name}
+                  required
+                ></input>
+                <br></br>
+                <label>ประเภท</label>
+                <select
+                  class="custom-select  border border-primary"
+                  onChange={(id) => { this.setState({ type_product_id: id.target.value }); }}
+                >
+                  {this.state.product_type.map((product_type) => {
+                    return <option value={product_type.id}>{product_type.type_name}</option>
+                  })}
+                </select>
+                <br></br> <br></br>
+                <label>จำนวน</label>
+                <input
+                  class="form-control border border-warning"
+                  style={{ width: "100%" }}
+                  type="number"
+                  min="1"
+                  max="1000"
+                  placeholder="1"
+                  onChange={(number) => { this.setState({ product_number: number.target.value }); }}
+                  value={this.state.product_number}
+                  required
+                ></input>
+                <br></br> <br></br>
+                <label>ราคา</label>
+                <input
+                  class="border border-primary"
+                  style={{ width: "100%" }}
+                  type="number"
+                  min="1"
+                  max="1000"
+                  placeholder="1"
+                  onChange={(price) => { this.setState({ product_price: price.target.value }); }}
+                  value={this.state.product_price}
+                  required
+                ></input>
+                <br></br>
+                <br></br>
+                <label for="">รูปสินค้า</label>
 
-                  <br></br>
+                <input
+                  class="form-control form-control-lg  border border-success"
+                  id="formFileLg"
+                  type="file"
+                  accept="image/*"
+                />
 
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>{" "}
-                  <button class="btn buttom btn-block" type="submit" onClick={() => this.successThisGoal()}>
-                ยืนยัน
+                <br></br>
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>{" "}
+                <button class="btn buttom btn-block" type="submit" onClick={() => this.successThisGoal()}>
+                  ยืนยัน
               </button>
-              {this.state.addType}
-                </div>
-              
+                {this.state.addType}
+              </div>
+
             </div>
           </div>
         </div>

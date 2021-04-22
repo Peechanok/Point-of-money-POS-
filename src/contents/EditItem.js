@@ -4,6 +4,8 @@ import "../App.css";
 import Navbar from '../components/Navbar'
 import Topnav from '../components/Topnav'
 import axios from 'axios';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import { Redirect } from "react-router";
 
 function EditItem(props) {
     const { itemid } = props.match.params
@@ -15,25 +17,10 @@ function EditItem(props) {
     const [type, setType] = useState("");
     const [product, setproduct] = useState({});
     const [product_type, setProduct_type] = useState([]);
+    const [addType, setisaddType] = useState(null);
 
-    const nameChange = ({ name }) => {
-        setName(name);
-    }
-    const priceChange = ({ price }) => {
-        setPrice(price);
-    }
-    const stockChange = ({ stock }) => {
-        setStock(stock);
-    }
-    const detailChange = ({ detail }) => {
-        setDetail(detail);
-    }
-    const picChange = ({ pic }) => {
-        setPic(pic);
-    }
-    const typeChange = ({ type }) => {
-        setType(type);
-    }
+    const [isRedirect, setisRedirect] = useState(false);
+
 
     const setD = () => {
         setName(product.product_name);
@@ -59,13 +46,55 @@ function EditItem(props) {
                 }
             })
     }, [product_type]);
+
     useEffect(() => {
         setD()
     }, [product]);
 
+    const successThisGoal = () => {
+
+        const getData = () => (
+            <SweetAlert
+                success
+                title="Success!"
+                confirmBtnBsStyle="success"
+                onConfirm={() => setisRedirect(true)}
+            >
+                บันทึกข้อมูลเรียบร้อย
+            </SweetAlert>
+        );
+        const product = {
+            product_name: name,
+            product_description: detail,
+            product_price: price,
+            product_picture: pic,
+            type_product_id: type,
+            product_number: stock,
+
+        };
+        console.log(product)
+        axios.put(`http://localhost:8080/api/product/${itemid}`, product)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            }).catch((error) => {
+                console.log(error)
+            });
+        setisaddType(getData());
+    }
+    const hide = () => {
+        console.log('Hiding alert...');
+
+        setisaddType(null);
+    }
+
     const mystyle = {
         fontFamily: "Kanit",
 
+    }
+
+    if (isRedirect == true) {
+      return <Redirect to='/Warehouse' />
     }
 
     return (
@@ -110,7 +139,7 @@ function EditItem(props) {
                                             name="name"
                                             class='form-control'
                                             value={name}
-                                            onChange={(name) => { nameChange(name) }}
+                                            onChange={(name) => { setName(name.target.value) }}
                                             required
                                         />
                                         <br></br>
@@ -124,12 +153,13 @@ function EditItem(props) {
                                                 name="price"
                                                 class='form-control'
                                                 value={price}
-                                                onChange={(price) => { priceChange(price) }}
+                                                onChange={(price) => { setPrice(price.target.value) }}
                                                 required
                                             />
                                         </div>
                                         <br></br>
-                                        <select>
+                                        <select class="custom-select  border border-primary"
+                                            onChange={(id) => { setType(id.target.value); }}>
                                             {product_type.map((product_type) => {
                                                 if (product_type.id == product.type_product_id) {
                                                     return <option value={product_type.id} selected>{product_type.type_name}</option>
@@ -149,7 +179,7 @@ function EditItem(props) {
                                                 step="1"
                                                 placeholder="7"
                                                 value={stock}
-                                                onChange={(stock) => { stockChange(stock) }}
+                                                onChange={(stock) => { setStock(stock.target.value) }}
                                                 required
                                             ></input>
                                         </span>
@@ -159,7 +189,7 @@ function EditItem(props) {
                                             <textarea
                                                 name="detail"
                                                 value={detail}
-                                                onChange={(detail) => { detailChange(detail) }}
+                                                onChange={(detail) => { setDetail(detail.target.value) }}
                                                 style={{ display: 'block', padding: 3, margin: 5, overflow: 'visible', overflowWrap: 'break-word', width: '100%', }}
                                                 rows={15}
                                             />
@@ -167,7 +197,10 @@ function EditItem(props) {
                                     </div>
                                 </div>
                             </div>
-
+                            <button type="button" class="btn btn-success btn-block" onClick={() => successThisGoal()}>
+                                <i class="far fa-save"></i>  SAVE
+                                </button>
+                            {addType}
                         </div>
                     </div>
                 </div>

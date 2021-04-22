@@ -77,7 +77,27 @@ exports.findOne = (req, res) => {
 
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
-  res.json({ 'test': 'update' });
+  const productId = req.params.id;
+
+  Product.update(req.body, {
+    where: { id: productId }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Product was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Product with id=${id}. Maybe Product was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Product with id=" + id
+      });
+    });
 };
 
 // Delete a Tutorial with the specified id in the request
@@ -107,7 +127,19 @@ exports.delete = (req, res) => {
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {
-  res.json({ 'test': 'deleteAll' });
+  Product.destroy({
+    where: {},
+    truncate: false
+  })
+    .then(nums => {
+      res.send({ message: `${nums} Product were deleted successfully!` });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while removing all Product."
+      });
+    });
 };
 
 // Find all published Tutorials
