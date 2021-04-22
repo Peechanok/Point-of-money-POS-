@@ -46,11 +46,25 @@ class Product extends Component {
 
   renderTableData() {
     if (this.state.type_id != this.props.location.query && this.props.location.query != undefined) {
-      console.log(this.props.location.query)
       this.setState({ type_id: this.props.location.query });
     }
     return this.state.product.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
+      const cart = this.state.carts.find(item => item.product.id === id)
+      const button = () => {
+        if (cart && product_number - cart.quantity <= 0) {
+          return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
+          
+        }
+        else {
+          return <button type="button" class="btn btn-info btn-block" onClick={() => {
+            this.addToCart(product, 1)
+            localStorage.setItem('cart', JSON.stringify(this.props.cart));
+          }}>
+            ADD TO CART <i class="fas fa-shopping-cart"></i>
+          </button>
+        }
+      }
       if (this.state.type_id == type_product_id) {
         return (
 
@@ -69,14 +83,7 @@ class Product extends Component {
                 <i class="fas fa-check-circle"></i> {product_number} in stock
                     </span>
             </Link>
-            <button type="button" class="btn btn-info btn-block" onClick={() => {
-              this.addToCart(product, 1)
-              localStorage.setItem('cart', JSON.stringify(this.props.cart));
-            }}>
-              ADD TO CART <i class="fas fa-shopping-cart"></i>
-
-
-            </button>
+            {button()}
           </div>
 
         )

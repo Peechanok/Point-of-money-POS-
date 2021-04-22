@@ -16,14 +16,17 @@ class ItemDetail extends Component {
       product: {},
       itemid: this.props.match.params.itemid,
       carts: this.props.cart,
+      cart: {},
       num: 0
     }
   }
   componentDidMount() {
-    console.log(this.state.itemid)
     axios.get(`http://localhost:8080/api/product/${this.state.itemid}`)
       .then(res => {
         this.setState({ product: res.data });
+        const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = res.data
+        const cart = this.state.carts.find(item => item.product.id === id)
+        this.setState({ cart: cart })
       })
 
   }
@@ -41,8 +44,18 @@ class ItemDetail extends Component {
   }
 
   renderTableData() {
-    const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product //destructuring
-    console.log(id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt)
+    const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product
+    const button=() =>{
+      if (this.state.cart.quantity && product_number-this.state.cart.quantity > 0) {
+        return <button type="button" class="btn btn-info btn-block" onClick={() => {
+          this.addToCart(this.state.product, 1)
+          localStorage.setItem('cart', JSON.stringify(this.props.cart));
+        }}>ADD TO CART <i class="fas fa-shopping-cart"></i></button>
+      }
+      else{
+        return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
+      }
+    }
     return (
       <div class="col-lg " style={{ maxWidth: '80%' }}>
         <br></br>
@@ -68,8 +81,8 @@ class ItemDetail extends Component {
               <span class="product-stock">
                 <i class="fas fa-check-circle"></i> <input
                   type="number"
-                  min={1}
-                  max={product_number}
+                  min={0}
+                  max={(product_number - (this.state.cart.quantity ? this.state.cart.quantity : 0)) > 0?product_number - (this.state.cart.quantity ? this.state.cart.quantity : 0):0}
                   step={1}
                   placeholder={7}
                   value={this.state.num}
@@ -81,14 +94,13 @@ class ItemDetail extends Component {
               <span class="product-stock">
                 <i class="fas fa-check-circle"></i> 20 in stock
                   </span>
-              <button type="button" class="btn btn-info btn-block" onClick={() => {
-                this.addToCart(this.state.product, 1)
-                localStorage.setItem('cart', JSON.stringify(this.props.cart));
-              }}>
-                ADD TO CART <i class="fas fa-shopping-cart"></i>
 
 
-              </button>
+              {button()}
+
+
+
+
               <br></br><br></br>
               <div style={{ display: 'block', border: 1, borderColor: 'rgb(245 245 245)', borderStyle: 'solid' }}>
                 <h8 style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, margin: 5 }} class="product-price">รายละเอียดสินค้า</h8>
@@ -106,6 +118,7 @@ class ItemDetail extends Component {
       fontFamily: "Kanit",
 
     }
+
     return (
       <div style={mystyle}>
         {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}

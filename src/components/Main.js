@@ -92,21 +92,21 @@ function App(props) {
                   <th >จำนวน</th>
                   <th ></th>
                   <th ></th>
-                  <th >{num}</th>
+                  <th >{num.toFixed(2)}</th>
                 </tr>
 
                 <tr>
                   <th >ภาษี</th>
                   <th ></th>
                   <th ></th>
-                  <th >{tax}</th>
+                  <th >{tax.toFixed(2)}</th>
                 </tr>
 
                 <tr>
                   <th >เงินทั้งหมด</th>
                   <th ></th>
                   <th ></th>
-                  <th >{total}</th>
+                  <th >{total.toFixed(2)}</th>
                 </tr>
               </table>
               <br></br>

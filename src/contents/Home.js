@@ -13,14 +13,15 @@ class Home extends Component {
     super(props)
     this.state = {
       product: [],
-      carts: []
+      carts: [],
+      cart:{}
     }
   }
   componentDidMount() {
     axios.get(`http://localhost:8080/api/product/all`)
       .then(res => {
         this.setState({ product: res.data, carts: this.props.cart });
-
+        
       })
 
   }
@@ -47,6 +48,22 @@ class Home extends Component {
   renderTableData() {
     return this.state.product.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
+      const cart = this.state.carts.find(item => item.product.id === id)
+      console.log(cart)
+      const button = () => {
+        if (cart && product_number - cart.quantity <= 0) {
+          return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
+          
+        }
+        else {
+          return <button type="button" class="btn btn-info btn-block" onClick={() => {
+            this.addToCart(product, 1)
+            localStorage.setItem('cart', JSON.stringify(this.props.cart));
+          }}>
+            ADD TO CART <i class="fas fa-shopping-cart"></i>
+          </button>
+        }
+      }
       return (
 
         <div class="product">
@@ -64,14 +81,7 @@ class Home extends Component {
               <i class="fas fa-check-circle"></i> {product_number} in stock
                 </span>
           </Link>
-          <button type="button" class="btn btn-info btn-block" onClick={() => {
-            this.addToCart(product, 1)
-            localStorage.setItem('cart', JSON.stringify(this.props.cart));
-          }}>
-            ADD TO CART <i class="fas fa-shopping-cart"></i>
-
-
-          </button>
+          {button()}
         </div>
 
       )
