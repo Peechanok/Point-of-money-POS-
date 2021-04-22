@@ -45,7 +45,8 @@ class Product extends Component {
   }
 
   renderTableData() {
-    if (this.state.type_id != this.props.location.query) {
+    if (this.state.type_id != this.props.location.query && this.props.location.query != undefined) {
+      console.log(this.props.location.query)
       this.setState({ type_id: this.props.location.query });
     }
     return this.state.product.map((product, index) => {
