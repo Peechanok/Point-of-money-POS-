@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import Navbar from '../components/Navbar'
 import Topnav from '../components/Topnav'
+import { connect } from 'react-redux';
+import { addToCart, removeFromCart, updateCartQuantity } from "../store/actions/cartActions";
 
 import axios from 'axios';
 
@@ -12,7 +14,9 @@ class ItemDetail extends Component {
     super(props)
     this.state = {
       product: {},
-      itemid: this.props.match.params.itemid
+      itemid: this.props.match.params.itemid,
+      carts: this.props.cart,
+      num: 0
     }
   }
   componentDidMount() {
@@ -23,9 +27,22 @@ class ItemDetail extends Component {
       })
 
   }
+
+  addToCart = (product, quantity) => {
+    const cart = this.props.cart.find(item => item.product.id === product.id);
+    if (cart) {
+      this.props.updateCartQuantity(product.id, cart.quantity + parseInt(this.state.num));
+    }
+    else {
+      this.props.addToCart(product, quantity);
+      this.setState({ carts: [...this.props.cart] })
+    }
+
+  }
+
   renderTableData() {
-    const { id, product_name, product_description, product_price,product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product //destructuring
-    console.log(id, product_name, product_description, product_price,product_number, product_picture, type_product_id, createdAt, updatedAt)
+    const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product //destructuring
+    console.log(id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt)
     return (
       <div class="col-lg " style={{ maxWidth: '80%' }}>
         <br></br>
@@ -40,6 +57,7 @@ class ItemDetail extends Component {
               />
             </div>
           </div>
+
           <div style={{ display: 'flex', flex: '1 1 auto', width: '50%' }}>
             <div style={{ display: 'block', width: '100%', display: 'flex', flexDirection: 'column', padding: '1.25rem 2.1875rem 0 1.25rem' }}>
               <h7 style={{ fontWeight: 500, fontSize: '1.25rem', overflow: 'visible', overflowWrap: 'break-word' }}>{product_name}</h7> <br></br>
@@ -47,14 +65,28 @@ class ItemDetail extends Component {
                 <h8 style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, fontSize: '1.875rem', margin: 5 }} class="product-price">{product_price} ฿</h8>
               </div>
               <br></br>
-
+              <span class="product-stock">
+                <i class="fas fa-check-circle"></i> <input
+                  type="number"
+                  min={1}
+                  max={product_number}
+                  step={1}
+                  placeholder={7}
+                  value={this.state.num}
+                  onChange={(stock) => { this.setState({ num: stock.target.value }) }}
+                  required
+                ></input>
+              </span>
               <br></br>
               <span class="product-stock">
                 <i class="fas fa-check-circle"></i> 20 in stock
                   </span>
-              <button type="button" class="btn btn-info btn-block" >
-                {this.state.itemid} <i class="fas fa-shopping-cart"></i>
-                {this.state.itemid}
+              <button type="button" class="btn btn-info btn-block" onClick={() => {
+                this.addToCart(this.state.product, 1)
+                localStorage.setItem('cart', JSON.stringify(this.props.cart));
+              }}>
+                ADD TO CART <i class="fas fa-shopping-cart"></i>
+
 
               </button>
               <br></br><br></br>
@@ -102,6 +134,19 @@ class ItemDetail extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart.cart
+  }
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (product, quantity) => {
+      dispatch(addToCart(product, quantity));
+    },
+    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
+    updateCartQuantity: (productId, quantity) => dispatch(updateCartQuantity(productId, quantity)),
+  }
+};
 
-
-export default ItemDetail;
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetail);

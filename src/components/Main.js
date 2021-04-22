@@ -4,13 +4,17 @@ import "../App.css";
 import Navbar from './Navbar'
 import Topnav from './Topnav'
 
-function App({ children }) {
-
+function App(props) {
   const mystyle = {
     fontFamily: "Kanit",
 
   }
-
+  let num = 0;
+  
+  props.carts.map(item => {num += item.product.product_price * item.quantity});
+  let tax = num*7.0/100.0;
+  let total = num+tax;
+    
   return (
     <div style={mystyle}>
       {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
@@ -49,7 +53,7 @@ function App({ children }) {
             </div>
 
             <br></br>
-            {children}
+            {props.children}
 
 
           </div>
@@ -70,40 +74,39 @@ function App({ children }) {
                   </tr>
                 </thead>
                 <tbody>
+                {props.carts.map((item, index) => {
+                const { product, quantity } = item
+                return (
                   <tr>
-                    <td>ส้ม</td>
-                    <td>80</td>
-                    <td>2</td>
-                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle"></i></a></td>
-                  </tr>
-
-                  <tr>
-                    <td>ส้ม</td>
-                    <td>80</td>
-                    <td>2</td>
-                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle"></i></a></td>
-                  </tr>
+                    <td>{product.product_name}</td>
+                    <td>{product.product_price}</td>
+                    <td>{quantity}</td>
+                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle" onClick={()=>{props.handleDelete(product.id)}}></i></a></td>
+                 </tr>
+                )
+              })
+              }
                 </tbody>
 
                 <tr>
                   <th >จำนวน</th>
                   <th ></th>
                   <th ></th>
-                  <th >4</th>
+                  <th >{num}</th>
                 </tr>
 
                 <tr>
                   <th >ภาษี</th>
                   <th ></th>
                   <th ></th>
-                  <th >20</th>
+                  <th >{tax}</th>
                 </tr>
 
                 <tr>
                   <th >เงินทั้งหมด</th>
                   <th ></th>
                   <th ></th>
-                  <th >160</th>
+                  <th >{total}</th>
                 </tr>
               </table>
               <br></br>
@@ -133,4 +136,4 @@ function App({ children }) {
 
 
 
-export default App;
+export default (App);
