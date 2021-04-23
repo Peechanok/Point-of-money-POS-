@@ -25,19 +25,20 @@ class ItemDetail extends Component {
       .then(res => {
         this.setState({ product: res.data });
         const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = res.data
-        const cart = this.state.carts.find(item => item.product.id === id)
+        const cart = (this.state.carts.find(item => item.product.id === id) !== undefined ? this.state.carts.find(item => item.product.id === id) : { product: res.data, quantity: 0 })
         this.setState({ cart: cart })
       })
 
   }
 
-  addToCart = (product, quantity) => {
+  addToCart = (product) => {
     const cart = this.props.cart.find(item => item.product.id === product.id);
     if (cart) {
       this.props.updateCartQuantity(product.id, cart.quantity + parseInt(this.state.num));
+      this.setState({ carts: [...this.props.cart] })
     }
     else {
-      this.props.addToCart(product, quantity);
+      this.props.addToCart(product, parseInt(this.state.num));
       this.setState({ carts: [...this.props.cart] })
     }
 
@@ -45,14 +46,22 @@ class ItemDetail extends Component {
 
   renderTableData() {
     const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product
-    const button=() =>{
-      if (this.state.cart.quantity && product_number-this.state.cart.quantity > 0) {
+    let cart = (this.state.carts.find(item => item.product.id === id) ? this.state.carts.find(item => item.product.id === id) : { product: this.state.product, quantity: 0 })
+    const button = () => {
+      if (cart && product_number - cart.quantity > 0) {
         return <button type="button" class="btn btn-info btn-block" onClick={() => {
-          this.addToCart(this.state.product, 1)
+          this.addToCart(this.state.product)
+          if (product_number - cart.quantity < this.state.num) {
+            this.setState({ num: product_number - cart.quantity })
+          }
+          else {
+            cart = (this.state.carts.find(item => item.product.id === id) ? this.state.carts.find(item => item.product.id === id) : { product: this.state.product, quantity: 0 })
+            this.setState({ num: product_number - cart.quantity })
+          }
           localStorage.setItem('cart', JSON.stringify(this.props.cart));
         }}>ADD TO CART <i class="fas fa-shopping-cart"></i></button>
       }
-      else{
+      else {
         return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
       }
     }
@@ -82,7 +91,7 @@ class ItemDetail extends Component {
                 <i class="fas fa-check-circle"></i> <input
                   type="number"
                   min={0}
-                  max={(product_number - (this.state.cart.quantity ? this.state.cart.quantity : 0)) > 0?product_number - (this.state.cart.quantity ? this.state.cart.quantity : 0):0}
+                  max={(product_number - (cart ? cart.quantity : 0)) > 0 ? product_number - (cart.quantity ? cart.quantity : 0) : 0}
                   step={1}
                   placeholder={7}
                   value={this.state.num}
@@ -92,15 +101,9 @@ class ItemDetail extends Component {
               </span>
               <br></br>
               <span class="product-stock">
-                <i class="fas fa-check-circle"></i> 20 in stock
+                <i class="fas fa-check-circle"></i> {product_number} in stock
                   </span>
-
-
               {button()}
-
-
-
-
               <br></br><br></br>
               <div style={{ display: 'block', border: 1, borderColor: 'rgb(245 245 245)', borderStyle: 'solid' }}>
                 <h8 style={{ display: 'block', background: "rgb(245 245 245)", padding: 3, margin: 5 }} class="product-price">รายละเอียดสินค้า</h8>
