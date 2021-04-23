@@ -1,7 +1,7 @@
 const db = require("../models");
 const Type_Product = db.type_product;
 const Op = db.Sequelize.Op;
-
+const Product = db.product;
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Create a Tutorial
@@ -9,11 +9,14 @@ exports.create = (req, res) => {
   const type_prod = {
     type_name: req.body.type_name,
     type_description: req.body.type_description,
-   
+
+    
+  };
+  const prod = {
+    type_product_id: req.body.type_product_id,
     
     
   };
-
   // Save Tutorial in the database
   Type_Product.create(type_prod)
     .then(data => {
@@ -80,8 +83,40 @@ exports.update = (req, res) => {
 
 // Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
-  res.json({'test':'delete'});
+  let product_TypeId = req.params.id;
+
+  
+  Type_Product.destroy({
+    where: { id: product_TypeId }
+
+  })
+  
+  // Product.destroy({
+  //     where: {type_product_id:product_TypeId } != null ?{type_product_id:product_TypeId }  : {type_product_id:type_product_id }
+  // })
+  
+
+     
+ .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Product_type was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Product_type with id=${id}. Maybe Product_type was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Product_type with id=" + id
+      });
+    });
+  
+
 };
+
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {

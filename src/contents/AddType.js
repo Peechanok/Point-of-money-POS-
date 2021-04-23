@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Topnav from "../components/Topnav";
 import "../App.css";
 import SweetAlert from 'react-bootstrap-sweetalert';
-
+import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { Redirect } from "react-router";
 
 class AddType extends React.Component {
 
@@ -13,17 +14,36 @@ class AddType extends React.Component {
     this.state = {
       addType: null,
       count: 0,
-      product_type: [],
+      product_type: [],type_product: [],
       type_name: '',
       type_description: '',
+      isRedirect: false
     };
   }
 
-  onFormSubmit = (e) => {
+  handleDelete(id){
+    console.log(id);
+    axios.delete(`http://localhost:8080/api/type_product/${id}`)  
+        .then(res => {  
+        console.log(res);
+        console.log(res.data);  
 
+        const type_product = this.state.type_product.filter(type_product => type_product.id !== id);  
+        this.setState({ type_product : type_product });  
+    }).catch((error) => {
+        console.log(error.response)
+    })  
+    this.hideAlert()
+}
 
-  }
-
+hideAlert() {
+    console.log('Hiding alert...');
+    this.setState({
+        alert: null
+        
+    });
+    window.location.reload();
+}
   componentDidMount() {
     axios.get(`http://localhost:8080/api/type_product/all`)
       .then(res => {
@@ -66,14 +86,38 @@ class AddType extends React.Component {
     this.setState({
       addType: null
     });
+    window.location.reload();
 
   }
+  deleteThisGoal(id, type_name) {
+    console.log(type_name);
+    const getAlert = () => (
+      
+        <SweetAlert
+            warning
+            showCancel
+            showCloseButton
+            confirmBtnText="Yes, delete it!"
+            confirmBtnBsStyle="danger"
+            title="Are you sure?"
+            onConfirm={() => this.handleDelete(id)}
+            onCancel={() => this.hideAlert()}
+            cancelBtnBsStyle="light"
+        >
+            ลบ "{type_name}" ใช่หรือไม่<br></br>
+            ถ้าลบแล้วข้อมูลจะไม่สามารถกู้คืนได้
+        </SweetAlert>
+    );
 
+    this.setState({
+        alert: getAlert()
+    });
+}
   render() {
     const mystyle = {
       fontFamily: "Kanit",
     };
-
+  
     return (
       <div style={mystyle}>
         <Topnav />
@@ -119,6 +163,7 @@ class AddType extends React.Component {
               <tr>
                 <th style={{ background: "#8FBC8F", color: "white" }}>#</th>
                 <th style={{ width: '70%', background: "#8FBC8F", color: "white" }}>ชื่อประเภท</th>
+                <th style={{  background: "#8FBC8F", color: "white" }}>ลบ</th>
               </tr>
               {this.state.product_type.map((product_type, index) => {
                 const { id, type_name, type_description, createdAt, updatedAt } = product_type
@@ -126,6 +171,7 @@ class AddType extends React.Component {
                   <tr>
                     <td>{index + 1}</td>
                     <td>{type_name} </td>
+                    <td style={{ width: 100 }}><Link class='btn btn-outline-danger btn-block' onClick={() => this.deleteThisGoal(id, type_name)} ><i class="fas fa-trash-alt"></i></Link></td>
                   </tr>
                 )
               })
@@ -133,8 +179,10 @@ class AddType extends React.Component {
               <tr>
                 <th style={{ background: "#90EE90", color: "black" }}>จำนวนทั้งหมด</th>
                 <th style={{ background: "#90EE90", color: "black" }}>{this.state.product_type.length} </th>
+                <th style={{ background: "#90EE90", color: "black" }}></th>
               </tr>
             </table>
+            {this.state.alert}
           </div>
         </div>
       </div>
