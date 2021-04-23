@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import Navbar from './Navbar'
@@ -9,6 +9,7 @@ function App(props) {
     fontFamily: "Kanit",
 
   }
+  const [searcher, setSearcher] = useState("");
   let num = 0;
   
   props.carts.map(item => {num += item.product.product_price * item.quantity});
@@ -43,10 +44,11 @@ function App(props) {
                 class="form-control"
                 placeholder="ค้นหาสินค้าได้ที่นี่"
                 name="inputSearch"
-                value=""
+                value={searcher}
+                onChange={(search)=>{setSearcher(search.target.value)}}
               ></input>
               <div class="input-group-append">
-                <button type="button" class="btn btn-info" value="search" onclick="">
+                <button type="button" class="btn btn-info" value="search" onClick={()=>{props.halndleSearch(searcher)}}>
                   <i class="fa fa-search"></i>
                 </button>
               </div>

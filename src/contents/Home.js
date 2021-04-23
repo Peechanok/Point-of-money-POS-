@@ -14,16 +14,21 @@ class Home extends Component {
     this.state = {
       product: [],
       carts: [],
-      cart:{}
+      cart: {},
+      searcher: "",
     }
   }
   componentDidMount() {
     axios.get(`http://localhost:8080/api/product/all`)
       .then(res => {
         this.setState({ product: res.data, carts: this.props.cart });
-        
+
       })
 
+  }
+  halndleSearch = (text) => {
+    this.setState({ searcher: text })
+    console.log(this.state.searcher)
   }
 
   handleDelete = (id) => {
@@ -46,14 +51,16 @@ class Home extends Component {
   }
 
   renderTableData() {
-    return this.state.product.map((product, index) => {
+    const products = this.state.product.filter(product => {
+      return product.product_name.toLowerCase().includes(this.state.searcher.toLowerCase())
+    })
+    return products.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
       const cart = this.state.carts.find(item => item.product.id === id)
-      console.log(cart)
       const button = () => {
         if (cart && product_number - cart.quantity <= 0) {
           return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
-          
+
         }
         else {
           return <button type="button" class="btn btn-info btn-block" onClick={() => {
@@ -94,7 +101,7 @@ class Home extends Component {
     };
     console.log(this.state.carts, this.props.cart)
     return (
-      <Shop carts={this.state.carts} handleDelete={this.handleDelete}>
+      <Shop carts={this.state.carts} handleDelete={this.handleDelete} halndleSearch={this.halndleSearch}>
         <div id="box2">
           {this.renderTableData()}
         </div>
