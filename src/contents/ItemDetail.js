@@ -16,7 +16,6 @@ class ItemDetail extends Component {
       product: {},
       itemid: this.props.match.params.itemid,
       carts: this.props.cart,
-      cart: {},
       num: 0
     }
   }
@@ -25,8 +24,6 @@ class ItemDetail extends Component {
       .then(res => {
         this.setState({ product: res.data });
         const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = res.data
-        const cart = (this.state.carts.find(item => item.product.id === id) !== undefined ? this.state.carts.find(item => item.product.id === id) : { product: res.data, quantity: 0 })
-        this.setState({ cart: cart })
       })
 
   }
