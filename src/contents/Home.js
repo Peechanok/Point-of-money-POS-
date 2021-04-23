@@ -26,6 +26,7 @@ class Home extends Component {
       })
 
   }
+
   halndleSearch = (text) => {
     this.setState({ searcher: text })
     console.log(this.state.searcher)
@@ -38,6 +39,18 @@ class Home extends Component {
     localStorage.setItem('cart', JSON.stringify(cart));
 
   }
+
+  handleDeleteAll = () => {
+    this.props.cart.map((cart, index) => {
+      const {product,  quantity} = cart
+      return  this.props.removeFromCart(product.id);
+    })
+    const cart = []
+    this.setState({ carts: cart });
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+  }
+
   addToCart = (product, quantity) => {
     const cart = this.props.cart.find(item => item.product.id === product.id);
     if (cart) {
@@ -101,7 +114,7 @@ class Home extends Component {
     };
     console.log(this.state.carts, this.props.cart)
     return (
-      <Shop carts={this.state.carts} handleDelete={this.handleDelete} halndleSearch={this.halndleSearch}>
+      <Shop carts={this.state.carts} handleDelete={this.handleDelete} handleDeleteAll={this.handleDeleteAll} halndleSearch={this.halndleSearch}>
         <div id="box2">
           {this.renderTableData()}
         </div>

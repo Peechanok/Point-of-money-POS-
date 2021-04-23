@@ -11,11 +11,11 @@ function App(props) {
   }
   const [searcher, setSearcher] = useState("");
   let num = 0;
-  
-  props.carts.map(item => {num += item.product.product_price * item.quantity});
-  let tax = num*7.0/100.0;
-  let total = num+tax;
-    
+
+  props.carts.map(item => { num += item.product.product_price * item.quantity });
+  let tax = num * 7.0 / 100.0;
+  let total = num + tax;
+
   return (
     <div style={mystyle}>
       {/* <nav class="navbar navbar-light bg-light navbar-expand nav-pills nav-justified flex-column flex-md-row bd-navbar"> */}
@@ -45,10 +45,10 @@ function App(props) {
                 placeholder="ค้นหาสินค้าได้ที่นี่"
                 name="inputSearch"
                 value={searcher}
-                onChange={(search)=>{setSearcher(search.target.value)}}
+                onChange={(search) => { setSearcher(search.target.value) }}
               ></input>
               <div class="input-group-append">
-                <button type="button" class="btn btn-info" value="search" onClick={()=>{props.halndleSearch(searcher)}}>
+                <button type="button" class="btn btn-info" value="search" onClick={() => { props.halndleSearch(searcher) }}>
                   <i class="fa fa-search"></i>
                 </button>
               </div>
@@ -76,18 +76,18 @@ function App(props) {
                   </tr>
                 </thead>
                 <tbody>
-                {props.carts.map((item, index) => {
-                const { product, quantity } = item
-                return (
-                  <tr>
-                    <td>{product.product_name}</td>
-                    <td>{product.product_price}</td>
-                    <td>{quantity}</td>
-                    <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle" onClick={()=>{props.handleDelete(product.id)}}></i></a></td>
-                 </tr>
-                )
-              })
-              }
+                  {props.carts.map((item, index) => {
+                    const { product, quantity } = item
+                    return (
+                      <tr>
+                        <td>{product.product_name}</td>
+                        <td>{product.product_price}</td>
+                        <td>{quantity}</td>
+                        <td><a href="#" style={{ fontsize: "24px", color: "red" }}> <i class="fas fa-minus-circle" onClick={() => { props.handleDelete(product.id) }}></i></a></td>
+                      </tr>
+                    )
+                  })
+                  }
                 </tbody>
 
                 <tr>
@@ -113,7 +113,7 @@ function App(props) {
               </table>
               <br></br>
 
-              <button type="button" class="btn btn-danger btn-block" style={{ borderradius: "20%" }}>
+              <button type="button" class="btn btn-danger btn-block" style={{ borderradius: "20%" }} onClick={() => { props.handleDeleteAll() }}>
                 ลบรายการทั้งหมด
                     </button>
               <button type="button" class="btn btn-success btn-block" style={{ borderradius: "20%" }}>
