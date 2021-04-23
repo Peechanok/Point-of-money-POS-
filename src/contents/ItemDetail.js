@@ -23,7 +23,6 @@ class ItemDetail extends Component {
     axios.get(`http://localhost:8080/api/product/${this.state.itemid}`)
       .then(res => {
         this.setState({ product: res.data });
-        const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = res.data
       })
 
   }
@@ -53,7 +52,9 @@ class ItemDetail extends Component {
           }
           else {
             cart = (this.state.carts.find(item => item.product.id === id) ? this.state.carts.find(item => item.product.id === id) : { product: this.state.product, quantity: 0 })
-            this.setState({ num: product_number - cart.quantity })
+            if (product_number - cart.quantity < this.state.num) {
+              this.setState({ num: product_number - cart.quantity })
+            }
           }
           localStorage.setItem('cart', JSON.stringify(this.props.cart));
         }}>ADD TO CART <i class="fas fa-shopping-cart"></i></button>
