@@ -7,7 +7,7 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "*"
 };
 
 
@@ -53,6 +53,7 @@ app.listen(80, function () {
 require("./app/routes/product.routes")(app);
 require("./app/routes/type_product.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/sales.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 

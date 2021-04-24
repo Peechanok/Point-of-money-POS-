@@ -4,17 +4,81 @@ import "../App.css";
 import Navbar from './Navbar'
 import Topnav from './Topnav'
 
+import SweetAlert from 'react-bootstrap-sweetalert';
+import axios from 'axios';
+
 function App(props) {
   const mystyle = {
     fontFamily: "Kanit",
 
   }
   const [searcher, setSearcher] = useState("");
+  const [addType, setaddType] = useState(null);
   let num = 0;
 
   props.carts.map(item => { num += item.product.product_price * item.quantity });
   let tax = num * 7.0 / 100.0;
   let total = num + tax;
+
+  const saveSales = () => {
+    const getData = () => (
+      <SweetAlert
+        success
+        title="Success!"
+        confirmBtnBsStyle="success"
+        onConfirm={() => { setaddType(null); props.handleDeleteAll(); }}
+      >
+        เพิ่มข้อมูลเรียบร้อย
+      </SweetAlert>
+    );
+    const sales = {
+      sales: total,
+      user_id: 1,
+    };
+    axios.post(`http://localhost:8080/api/sales/`, sales)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        setaddType(getData());
+      }).catch((error) => {
+        console.log(error.message)
+      });
+
+  }
+
+  const saveAlert = () => {
+    let getData = () => { return 0 }
+    if (total == 0) {
+      getData = () => (
+        <SweetAlert
+          error
+          title="Oops!"
+          confirmBtnBsStyle="error"
+          onConfirm={() => { setaddType(null); }}
+        >
+          ยังไม่มีสินค้าในตะกร้านี้
+        </SweetAlert>
+      )
+    }
+    else {
+      getData = () => (
+        <SweetAlert
+          warning
+          showCancel
+          showCloseButton
+          confirmBtnText="Confirm"
+          confirmBtnBsStyle="success"
+          title="Are you sure?"
+          onConfirm={() => saveSales()}
+          onCancel={() => setaddType(null)}
+          cancelBtnBsStyle="light"
+        >
+          ต้องการบันทึกรายการใช่หรือไม่
+        </SweetAlert>
+      )
+    }
+    setaddType(getData());
+  }
 
   return (
     <div style={mystyle}>
@@ -116,20 +180,15 @@ function App(props) {
               <button type="button" class="btn btn-danger btn-block" style={{ borderradius: "20%" }} onClick={() => { props.handleDeleteAll() }}>
                 ลบรายการทั้งหมด
                     </button>
-              <button type="button" class="btn btn-success btn-block" style={{ borderradius: "20%" }}>
+              <button type="button" class="btn btn-success btn-block" style={{ borderradius: "20%" }} onClick={() => { saveAlert() }}>
                 บันทึกการขาย
                     </button>
 
-
-
               <br></br>
-
-
+              {addType}
             </div>
-
             <br></br>
           </div>
-
         </div>
       </div>
     </div>

@@ -268,7 +268,7 @@ const dashboardShippedProductsChart = {
         "2003",
         "2004",
         "2005",
-        
+
       ],
       datasets: [
         {
@@ -305,7 +305,7 @@ const dashboardAllProductsChart = {
     gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     gradientFill.addColorStop(1, hexToRGB("#18ce0f", 0.4));
     return {
-      labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+      labels: ["3am", "6am", "9am", "12pm,", "3pm", "6pm", "9pm", "12am"],
       datasets: [
         {
           label: "ยอดขาย",

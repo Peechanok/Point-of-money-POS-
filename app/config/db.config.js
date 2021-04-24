@@ -5,6 +5,7 @@ module.exports = {
     DB: "point_of_sales",
     dialect: "postgres",
     operatorsAliases: false,
+    timezone: '+07:00',
     pool: {
       max: 5,
       min: 0,
