@@ -83,7 +83,8 @@ exports.update = (req, res) => {
 // Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
   let product_TypeId = req.params.id;
-
+  let type_product_TypeId = req.params.id;
+  
 
   Type_Product.destroy({
     where: { id: product_TypeId }
@@ -93,9 +94,30 @@ exports.delete = (req, res) => {
     // Product.destroy({
     //     where: {type_product_id:product_TypeId } != null ?{type_product_id:product_TypeId }  : {type_product_id:type_product_id }
     // })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Product_type was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Product_type with . Maybe Product_type was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Product_type with id=" 
+      });
+    });
+    Product.destroy({
+    where: { type_product_id: product_TypeId }
 
+  })
 
-
+    // Product.destroy({
+    //     where: {type_product_id:product_TypeId } != null ?{type_product_id:product_TypeId }  : {type_product_id:type_product_id }
+    // })
     .then(num => {
       if (num == 1) {
         res.send({
@@ -112,7 +134,7 @@ exports.delete = (req, res) => {
         message: "Could not delete Product_type with id=" + id
       });
     });
-
+  
 
 };
 
