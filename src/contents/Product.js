@@ -27,9 +27,9 @@ class Product extends Component {
 
   }
 
-  handleSales=()=>{
+  handleSales = () => {
     this.state.carts.map((cart, index) => {
-      const {product,  quantity} = cart
+      const { product, quantity } = cart
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
       const products = {
         product_name: product_name,
@@ -37,33 +37,33 @@ class Product extends Component {
         product_price: product_price,
         product_picture: product_picture,
         type_product_id: type_product_id,
-        product_number: product_number-quantity,
+        product_number: product_number - quantity,
 
-    };
-    console.log(product)
-    axios.put(`http://localhost:8080/api/product/${id}`, products)
+      };
+      console.log(product)
+      axios.put(`http://localhost:8080/api/product/${id}`, products)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
-            console.log(this.props.cart);
+          console.log(res);
+          console.log(res.data);
+          console.log(this.props.cart);
         }).catch((error) => {
-            console.log(error)
+          console.log(error)
         });
-        const nnproduct = this.state.product.filter(product => product.id !== id); 
-        const nproduct = {
-          id:id,
-          product_name: product_name,
-          product_description: product_description,
-          product_price: product_price,
-          product_picture: product_picture,
-          type_product_id: type_product_id,
-          product_number: product_number-quantity,
-          createdAt:createdAt,
-          updatedAt:updatedAt
-  
-      }; 
-        this.setState({ product: [...nnproduct, nproduct] })   
-      return  0
+      const nnproduct = this.state.product.filter(product => product.id !== id);
+      const nproduct = {
+        id: id,
+        product_name: product_name,
+        product_description: product_description,
+        product_price: product_price,
+        product_picture: product_picture,
+        type_product_id: type_product_id,
+        product_number: product_number - quantity,
+        createdAt: createdAt,
+        updatedAt: updatedAt
+
+      };
+      this.setState({ product: [...nnproduct, nproduct] })
+      return 0
     })
   }
 
@@ -116,12 +116,9 @@ class Product extends Component {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
       const cart = this.state.carts.find(item => item.product.id === id)
       const button = () => {
-        if (cart && product_number - cart.quantity <= 0) {
+        if ((cart && product_number - cart.quantity <= 0) || product_number <= 0) {
           return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
 
-        }
-        else if(product_number == 0){
-          return  <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
         }
         else {
           return <button type="button" class="btn btn-info btn-block" onClick={() => {
