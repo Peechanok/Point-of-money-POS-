@@ -120,6 +120,9 @@ class Product extends Component {
           return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
 
         }
+        else if(product_number == 0){
+          return  <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
+        }
         else {
           return <button type="button" class="btn btn-info btn-block" onClick={() => {
             this.addToCart(product, 1)
