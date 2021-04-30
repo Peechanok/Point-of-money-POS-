@@ -27,6 +27,46 @@ class Product extends Component {
 
   }
 
+  handleSales=()=>{
+    this.state.carts.map((cart, index) => {
+      const {product,  quantity} = cart
+      const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
+      const products = {
+        product_name: product_name,
+        product_description: product_description,
+        product_price: product_price,
+        product_picture: product_picture,
+        type_product_id: type_product_id,
+        product_number: product_number-quantity,
+
+    };
+    console.log(product)
+    axios.put(`http://localhost:8080/api/product/${id}`, products)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            console.log(this.props.cart);
+        }).catch((error) => {
+            console.log(error)
+        });
+        const nnproduct = this.state.product.filter(product => product.id !== id); 
+        const nproduct = {
+          id:id,
+          product_name: product_name,
+          product_description: product_description,
+          product_price: product_price,
+          product_picture: product_picture,
+          type_product_id: type_product_id,
+          product_number: product_number-quantity,
+          createdAt:createdAt,
+          updatedAt:updatedAt
+  
+      }; 
+        this.setState({ product: [...nnproduct, nproduct] })   
+      return  0
+    })
+  }
+
   halndleSearch = (text) => {
     this.setState({ searcher: text })
     console.log(this.state.searcher)
@@ -67,10 +107,11 @@ class Product extends Component {
     if (this.state.type_id != this.props.location.query && this.props.location.query != undefined) {
       this.setState({ type_id: this.props.location.query, searcher: "" });
     }
-    const products = this.state.product.filter(product => {
+    let products = this.state.product.filter(product => {
       console.log(product)
       return product.product_name.toLowerCase().includes(this.state.searcher.toLowerCase())
     })
+    products = products.sort((a, b) => a.id > b.id ? 1 : -1)
     return products.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product //destructuring
       const cart = this.state.carts.find(item => item.product.id === id)
@@ -120,7 +161,7 @@ class Product extends Component {
     };
     console.log(this.props)
     return (
-      <Shop carts={this.state.carts} handleDelete={this.handleDelete} handleDeleteAll={this.handleDeleteAll} halndleSearch={this.halndleSearch}>
+      <Shop carts={this.state.carts} handleDelete={this.handleDelete} handleDeleteAll={this.handleDeleteAll} halndleSearch={this.halndleSearch} handleSales={this.handleSales}>
         <div id="box2">
           {this.renderTableData()}
         </div>

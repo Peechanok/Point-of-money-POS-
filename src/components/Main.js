@@ -26,7 +26,7 @@ function App(props) {
         success
         title="Success!"
         confirmBtnBsStyle="success"
-        onConfirm={() => { setaddType(null); props.handleDeleteAll(); }}
+        onConfirm={() => { setaddType(null); props.handleDeleteAll(); props.handleSales() }}
       >
         เพิ่มข้อมูลเรียบร้อย
       </SweetAlert>
