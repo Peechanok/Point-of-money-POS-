@@ -79,7 +79,7 @@ class Warehouse extends Component {
     }
 
     renderTableData() {
-        return this.state.product.map((product, index) => {
+        return this.state.product.sort((a, b) => a.id > b.id ? 1 : -1).map((product, index) => {
             var i = 0
             var type = ""
             const { id, product_name, product_number, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
