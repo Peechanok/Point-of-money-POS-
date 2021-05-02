@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import styled from "styled-components";
 import logo from "../assets/pos.png";
 import Input from "./Input";
@@ -7,14 +7,37 @@ import { Link } from 'react-router-dom';
 import { Button} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
-const Login = () => {
-  
-  
- const onSubmit = () => {
-
-        // return  <Redirect  to="/Home" />
-    
+import Home from "../contents/Home";
+import Routing from "../route/Route";
+import { createStore } from 'redux';
+import bgImg from "../../src/assets/bg.jpg";
+import { Provider } from 'react-redux';
+import rootReducer from '../store/reducers/rootReducer'
+import PropTypes from 'prop-types';
+async function loginUser(credentials) {
+  return fetch('http://localhost:8080/api/user/all', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
  }
+const Login = ({ setToken }) => {
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+  
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await loginUser({
+      username, 
+      password 
+    });
+    setToken(token);
+    console.log(token)
+    console.log(setToken)
+  }
   return (
     <Container>
       <LogoWrapper>
@@ -23,24 +46,37 @@ const Login = () => {
           POS <span>Point of Money</span>
         </h3>
       </LogoWrapper>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <h3>Sign In</h3>
   
-        <Input type="username" placeholder="Username" />
-        <Input type="password" placeholder="Password" />
-        <button onClick={onSubmit}>Sign In</button>
+        <Input type="username" placeholder="Username" onChange={e => setUserName(e.target.value)}/>
+        <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+        <button type="submit">Sign In</button>
         
       </Form>
-      <div>
+      {/* <div>
 
-        <h4>
+       <h4>
            Have an account? <span> <Nav.Link href="/Registers">Sing up</Nav.Link></span>
         </h4>
-      </div>
+      </div> */}
     </Container>
   );
-};
+}
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 
+const Wrapper = styled.div`
+  background-image: url(${bgImg});
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+ 
+  justify-content: center;
+`;
 const Terms = styled.p`
   padding: 0 1rem;
   text-align: center;
@@ -109,8 +145,8 @@ const Container = styled.div`
   align-items: center;
   padding: 0 2rem;
 
-  @media (max-width: 900px) {
-    width: 100vw;
+  @media (max-width: 1200px) {
+    width: 200vw;
     position: absolute;
     padding: 0;
   }

@@ -9,7 +9,7 @@ module.exports = app => {
 
   // Create a new Tutorial
   router.post("/", user.create);
-
+  router.post("/:id", user.findData);
   // Retrieve all user
   //router.get("/all", user.findData);
 
