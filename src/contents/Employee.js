@@ -8,7 +8,7 @@ import childe from "../assets/childe.jpg";
 import { Link } from "react-router-dom";
 
 
-class Settingshop extends React.Component {
+class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -315,4 +315,4 @@ class Settingshop extends React.Component {
   }
 }
 
-export default Settingshop;
+export default Employee;
