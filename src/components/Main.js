@@ -100,7 +100,7 @@ function App(props) {
             </ul>
           </div>
 
-          <div class="col-lg-6 ">
+          <div class="col-lg-7 ">
             <div class="input-group">
               <input
                 id="searchBox"
