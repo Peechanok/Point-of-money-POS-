@@ -27,7 +27,7 @@ import Login from './components/Login';
 // }
 function App() {
   // const [token, setToken] = useState();
-  
+
   const store = createStore(rootReducer);
 
   const getToken = () => {
@@ -41,14 +41,14 @@ function App() {
     setToken(userToken);
   };
 
-
+  console.log(token)
   //  setToken: saveToken,token
   if (!token) {
 
     return <Login setToken={saveToken} />
   }
   return (
-    
+
     <div className="wrapper">
       <BrowserRouter>
         <Provider store={store}>

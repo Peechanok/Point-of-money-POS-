@@ -4,9 +4,9 @@ import logo from "../assets/pos.png";
 import Input from "./Input";
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
-import { Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Home from "../contents/Home";
 import Routing from "../route/Route";
 import { createStore } from 'redux';
@@ -23,16 +23,16 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
- }
+}
 const Login = ({ setToken }) => {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-  
+
   const handleSubmit = async e => {
     e.preventDefault();
     const token = await loginUser({
-      username, 
-      password 
+      username,
+      password
     });
     setToken(token);
     console.log(token)
@@ -48,11 +48,11 @@ const Login = ({ setToken }) => {
       </LogoWrapper>
       <Form onSubmit={handleSubmit}>
         <h3>Sign In</h3>
-  
-        <Input type="username" placeholder="Username" onChange={e => setUserName(e.target.value)}/>
-        <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+
+        <Input type="username" placeholder="Username" onChange={e => setUserName(e.target.value)} />
+        <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
         <button type="submit">Sign In</button>
-        
+
       </Form>
       {/* <div>
 

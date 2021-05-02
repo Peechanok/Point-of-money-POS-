@@ -44,8 +44,8 @@ class Employee extends React.Component {
 
   deleteThisGoal() {
     const getAlert = () => (
-      <SweetAlert 
-        warning 
+      <SweetAlert
+        warning
         showCancel
         showCloseButton
         confirmBtnText="Yes, delete it!"
@@ -53,7 +53,7 @@ class Employee extends React.Component {
         title="Are you sure?"
         onConfirm={() => this.hideAlert()}
         onCancel={() => this.hideAlert()}
-        cancelBtnBsStyle="light"     
+        cancelBtnBsStyle="light"
       >
         ถ้าลบแล้วข้อมูลจะไม่สามารถกู้คืนได้
       </SweetAlert>
@@ -62,6 +62,23 @@ class Employee extends React.Component {
     this.setState({
       alert: getAlert()
     });
+  }
+
+  checkRole() {
+    if (JSON.parse(localStorage.getItem('token'))[0].role == "ผู้จัดการ") {
+      return <Link
+        style={{
+          borderRadius: "50%",
+          width: "50px",
+          height: "50px",
+        }}
+        class="btn buttom "
+        onClick={() => this.openAddEmpolyee()}
+      >
+        <i class="fas fa-user-plus"></i>
+      </Link>
+    }
+    return <br></br>
   }
 
   hideAlert() {
@@ -80,7 +97,7 @@ class Employee extends React.Component {
       <div style={mystyle}>
         <Topnav />
         <br></br>
-    
+
 
         <div class="container">
           <div class="col">
@@ -94,17 +111,7 @@ class Employee extends React.Component {
                 textAlign: "right",
               }}
             >
-              <Link
-                style={{
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                }}
-                class="btn buttom "
-                onClick={() => this.openAddEmpolyee()}
-              >
-                <i class="fas fa-user-plus"></i>
-              </Link>
+              {this.checkRole()}
             </div>
 
             <section>
@@ -224,7 +231,7 @@ class Employee extends React.Component {
                 </tr>
               </thead>
               <tbody>
-            
+
 
                 <tr>
                   <th>1</th>
@@ -242,9 +249,9 @@ class Employee extends React.Component {
 
                   <td>
                     {" "}
-                    <Link 
+                    <Link
                       class="btn btn-outline-danger btn-block"
-                        onClick={() => this.deleteThisGoal()}
+                      onClick={() => this.deleteThisGoal()}
                     >
                       <i class="fas fa-trash-alt"></i>
                     </Link>
