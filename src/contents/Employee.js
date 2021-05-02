@@ -65,7 +65,8 @@ class Employee extends React.Component {
   }
 
   checkRole() {
-    if (JSON.parse(localStorage.getItem('token'))[0].role == "ผู้จัดการ") {
+    //if (JSON.parse(localStorage.getItem('token'))[0].role == "ผู้จัดการ") {
+    if (1) {
       return <Link
         style={{
           borderRadius: "50%",
