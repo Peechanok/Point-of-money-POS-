@@ -1,4 +1,4 @@
-import React,  { useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import "./App.css";
 import styled from "styled-components";
@@ -27,33 +27,35 @@ import Login from './components/Login';
 // }
 function App() {
   // const [token, setToken] = useState();
-  const getToken = () => {
-  const tokenString = localStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token
-};
-const saveToken = userToken => {
-  localStorage.setItem('token', JSON.stringify(userToken));
-  setToken(userToken.token);
-};
-  const [ token, setToken ] = useState(getToken());
+  
   const store = createStore(rootReducer);
 
-  //  setToken: saveToken,token
-  
-  if(!token) {
-    
-    return <Login setToken={setToken} />
-  }
+  const getToken = () => {
+    const tokenString = JSON.parse(localStorage.getItem('token'));
+    return tokenString
+  };
+  const [token, setToken] = useState(getToken());
 
+  const saveToken = userToken => {
+    localStorage.setItem('token', JSON.stringify(userToken));
+    setToken(userToken);
+  };
+
+
+  //  setToken: saveToken,token
+  if (!token) {
+
+    return <Login setToken={saveToken} />
+  }
   return (
+    
     <div className="wrapper">
       <BrowserRouter>
-      <Provider store={store}>
-        <Switch>
+        <Provider store={store}>
+          <Switch>
             <Routing />
-        </Switch>
-       </Provider>
+          </Switch>
+        </Provider>
       </BrowserRouter>
     </div>
   );
