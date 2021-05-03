@@ -639,7 +639,7 @@ class Dashboard extends React.Component {
                 </Col>
               </Row>
               <br></br>
-              <Col xs={12} md={6} lg={12}>
+              {/* <Col xs={12} md={6} lg={12}>
                 <Card>
                   <CardHeader>
                     <h5 className="card-category">ยอดขายตามพนักงาน</h5>
@@ -682,7 +682,7 @@ class Dashboard extends React.Component {
                     </Table>
                   </CardBody>
                 </Card>
-              </Col>
+              </Col> */}
               <br></br> <br></br>
             </div>
           </div>
