@@ -93,8 +93,8 @@ function Navigations() {
             <Nav.Link href=""></Nav.Link>
 
             <NavDropdown title={navDropdownTitle} id="nav-dropdown">
-              <NavDropdown.Item href="/Employee">จัดการร้านค้า</NavDropdown.Item>
-              <NavDropdown.Divider />
+              {/* <NavDropdown.Item href="/Employee">จัดการร้านค้า</NavDropdown.Item>
+              <NavDropdown.Divider /> */}
               <NavDropdown.Item style={{ color: "red" }} href="/" onClick={() => { localStorage.removeItem("token"); }}> <img src={logout} alt="user" width="20" height="20" /><t></t>ออกจากระบบ</NavDropdown.Item>
             </NavDropdown>
 
