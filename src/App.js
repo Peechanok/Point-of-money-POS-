@@ -52,9 +52,11 @@ function App() {
     <div className="wrapper">
       <BrowserRouter>
         <Provider store={store}>
+        <Wrapper>
           <Switch>
             <Routing />
           </Switch>
+          </Wrapper>
         </Provider>
       </BrowserRouter>
     </div>
