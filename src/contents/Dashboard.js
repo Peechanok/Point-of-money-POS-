@@ -572,7 +572,7 @@ class Dashboard extends React.Component {
                     </CardBody>
                     <CardFooter>
                       <div className="stats">
-                        <i className="now-ui-icons arrows-1_refresh-69" /> ยอดขายวันนี้ : {this.state.sDay.toFixed(2)} $
+                        <i className="now-ui-icons arrows-1_refresh-69" /> ยอดขายวันนี้ : {this.state.sDay.toFixed(2)} ฿
                       </div>
                     </CardFooter>
                   </Card>
@@ -594,7 +594,7 @@ class Dashboard extends React.Component {
                     </CardBody>
                     <CardFooter>
                       <div className="stats">
-                        <i className="now-ui-icons ui-2_time-alarm" /> ยอดขายเดือนนี้ : {this.state.sMonth.toFixed(2)} $
+                        <i className="now-ui-icons ui-2_time-alarm" /> ยอดขายเดือนนี้ : {this.state.sYear.toFixed(2)} ฿
                       </div>
                     </CardFooter>
                   </Card>
@@ -632,7 +632,7 @@ class Dashboard extends React.Component {
                     </CardBody>
                     <CardFooter>
                       <div className="stats">
-                        <i className="now-ui-icons arrows-1_refresh-69" /> ยอดขายปีนี้ : {this.state.sYear.toFixed(2)}$
+                        <i className="now-ui-icons arrows-1_refresh-69" /> ยอดขายปีนี้ : {this.state.sMonth.toFixed(2)} ฿
                       </div>
                     </CardFooter>
                   </Card>
@@ -673,7 +673,7 @@ class Dashboard extends React.Component {
                               <td>{fullname}</td>
                               <td>{role}</td>
 
-                              <td className="text-right">${salee}</td>
+                              <td className="text-right">฿{salee}</td>
                             </tr>
                           )
                         })
