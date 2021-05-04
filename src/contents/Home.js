@@ -111,6 +111,10 @@ class Home extends Component {
     return products.map((product, index) => {
       const { id, product_name, product_description, product_number, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
       const cart = this.state.carts.find(item => item.product.id === id)
+      let images = 0
+      if (product_picture != "") {
+        images = 1
+      }
       const button = () => {
         if ((cart && product_number - cart.quantity <= 0) || product_number <= 0) {
           return <button type="button" class="btn btn-danger btn-block">OUT OF ORDER <i class="fas fa-shopping-cart"></i></button>
@@ -131,7 +135,7 @@ class Home extends Component {
           <Link to={{ pathname: `/ItemDetail/${id}` }}>
             <img
               class="product-image"
-              src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
+              src={images ? `data:image/png;base64,${product_picture}` : "https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"}
               alt="DOS0fk.jpg"
               border="0"
             />

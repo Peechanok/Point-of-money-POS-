@@ -16,8 +16,8 @@ class AddProduct extends React.Component {
     type_product_id: 1,
     product_type: [],
     addType: null,
-    isRedirect: false
-
+    isRedirect: false,
+    test: ""
   }
 
   successThisGoal() {
@@ -32,6 +32,8 @@ class AddProduct extends React.Component {
         เพิ่มข้อมูลเรียบร้อย
       </SweetAlert>
     );
+    let image = { image: this.state.product_picture }
+    console.log(image)
     const product = {
       product_name: this.state.product_name,
       product_description: this.state.product_description,
@@ -60,6 +62,22 @@ class AddProduct extends React.Component {
       addType: null
 
     });
+  }
+  _handleRenderLoaded = (e) => {
+    let binaryString = e.target.result
+    this.setState({ product_picture: btoa(binaryString) })
+  }
+
+  onChange = (e) => {
+    console.log(e.target.files[0])
+    let file = e.target.files[0]
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = this._handleRenderLoaded.bind(this)
+
+      reader.readAsBinaryString(file)
+    }
   }
 
   // onFormSubmit = (e) => {
@@ -92,6 +110,7 @@ class AddProduct extends React.Component {
   }
 
   render() {
+    console.log(this.state.product_picture)
     const mystyle = {
       fontFamily: "Kanit",
     };
@@ -162,11 +181,15 @@ class AddProduct extends React.Component {
                 <label for="">รูปสินค้า</label>
 
                 <input
+                  onChange={(e) => { this.onChange(e) }}
                   class="form-control form-control-lg  border border-success"
                   id="formFileLg"
                   type="file"
                   accept="image/*"
                 />
+                <br></br>
+                {this.state.product_picture ? <img src={`data:image/png;base64,${this.state.product_picture}`} width="500" /> : ""}
+
 
                 <br></br>
 

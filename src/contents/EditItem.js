@@ -50,7 +50,22 @@ function EditItem(props) {
     useEffect(() => {
         setD()
     }, [product]);
+    const _handleRenderLoaded = (e) => {
+        let binaryString = e.target.result
+        setPic(btoa(binaryString))
+    }
 
+    const onChange = (e) => {
+        console.log(e.target.files[0])
+        let file = e.target.files[0]
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = _handleRenderLoaded.bind(this)
+
+            reader.readAsBinaryString(file)
+        }
+    }
     const successThisGoal = () => {
 
         const getData = () => (
@@ -113,16 +128,20 @@ function EditItem(props) {
                             <br></br>
                             <div style={{ display: 'flex', width: '90%' }}>
                                 <div>
-                                    <button type="button" class="btn btn-info btn-block" >
-                                        <i class="fas fa-camera"></i>  UPLOAD
-                                </button>
+                                    <input
+                                        onChange={(e) => { onChange(e) }}
+                                        class="form-control form-control-lg  border border-success"
+                                        id="formFileLg"
+                                        type="file"
+                                        accept="image/*"
+                                    />
                                     <br></br>
                                     <div style={{ display: '-webkit-box' }}>
 
                                         <div style={{ width: 500, height: 500 }}>
                                             <img
                                                 style={{ display: 'block', width: 500 }}
-                                                src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
+                                                src={pic == "" ? "https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg" : `data:image/png;base64,${pic}`}
                                                 alt="DOS0fk.jpg"
                                                 border="0"
                                             />

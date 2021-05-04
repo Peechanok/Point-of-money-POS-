@@ -83,6 +83,10 @@ class Warehouse extends Component {
             var i = 0
             var type = ""
             const { id, product_name, product_number, product_description, product_price, product_picture, type_product_id, createdAt, updatedAt } = product
+            let images = 0
+            if (product_picture != "") {
+                images = 1
+            }
             for (i = 0; i < this.state.product_type.length; i++) {
                 if (this.state.product_type[i].id == type_product_id) {
                     type = this.state.product_type[i].type_name
@@ -94,7 +98,7 @@ class Warehouse extends Component {
                     <td style={{ width: 100 }}>{index+1}</td>
                     <td style={{ width: 100 }}><img
                         style={{ display: 'block', maxWidth: 100, maxHeight: 100 }}
-                        src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
+                        src={images ? `data:image/png;base64,${product_picture}` : "https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"}
                         alt="DOS0fk.jpg"
                         border="0"
                     /></td>

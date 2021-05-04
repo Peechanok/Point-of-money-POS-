@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: "localhost",
+    HOST: "pomoney-db.co08z1ygs8vo.us-east-1.rds.amazonaws.com",
     USER: "postgres",
-    PASSWORD: "1234",
+    PASSWORD: "password123",
     DB: "point_of_sales",
     dialect: "postgres",
     operatorsAliases: false,

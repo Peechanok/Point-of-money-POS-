@@ -43,6 +43,10 @@ class ItemDetail extends Component {
   renderTableData() {
     const { id, product_name, product_description, product_price, product_number, product_picture, type_product_id, createdAt, updatedAt } = this.state.product
     let cart = (this.state.carts.find(item => item.product.id === id) ? this.state.carts.find(item => item.product.id === id) : { product: this.state.product, quantity: 0 })
+    let images = 0
+    if (product_picture != '') {
+      images = 1
+    }
     const button = () => {
       if (cart && product_number - cart.quantity > 0) {
         return <button type="button" class="btn btn-info btn-block" onClick={() => {
@@ -71,7 +75,7 @@ class ItemDetail extends Component {
             <div style={{ width: 500, height: 500 }}>
               <img
                 style={{ display: 'block', width: 500 }}
-                src="https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"
+                src={images ? `data:image/png;base64,${product_picture}` : "https://sv1.picz.in.th/images/2021/03/20/DOS0fk.jpg"}
                 alt="DOS0fk.jpg"
                 border="0"
               />

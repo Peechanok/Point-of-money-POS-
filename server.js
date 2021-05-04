@@ -16,10 +16,9 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // simple route
 app.get("/", (req, res) => {
@@ -35,6 +34,8 @@ db.sequelize.sync({ force: false }).then(() => {
 // app.get('/api/test', (req, res) => {
 //   res.json({'test':'xxxx'});
 // });
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 
 app.use(function(req, res, next) {
