@@ -20,7 +20,7 @@ class ItemDetail extends Component {
     }
   }
   componentDidMount() {
-    axios.get(`http://localhost:8080/api/product/${this.state.itemid}`)
+    axios.get(`/api/product/${this.state.itemid}`)
       .then(res => {
         this.setState({ product: res.data });
       })

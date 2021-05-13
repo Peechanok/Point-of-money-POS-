@@ -19,7 +19,7 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    axios.get(`http://localhost:8080/api/product/all`)
+    axios.get(`/api/product/all`)
       .then(res => {
         this.setState({ product: res.data, carts: this.props.cart });
 
@@ -54,7 +54,7 @@ class Home extends Component {
 
       };
       console.log(product)
-      axios.put(`http://localhost:8080/api/product/${id}`, products)
+      axios.put(`/api/product/${id}`, products)
         .then(res => {
           console.log(res);
           console.log(res.data);

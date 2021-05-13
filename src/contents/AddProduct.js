@@ -43,7 +43,7 @@ class AddProduct extends React.Component {
       product_number: this.state.product_number,
 
     };
-    axios.post(`http://localhost:8080/api/product/`, product)
+    axios.post(`/api/product/`, product)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -102,7 +102,7 @@ class AddProduct extends React.Component {
 
   componentDidMount() {
 
-    axios.get(`http://localhost:8080/api/type_product/all`)
+    axios.get(`/api/type_product/all`)
       .then(res => {
         this.setState({ product_type: res.data });
       })

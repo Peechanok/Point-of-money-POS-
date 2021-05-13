@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8080/api/sales/all`)
+    axios.get(`/api/sales/all`)
       .then(res => {
         this.setState({ sales: res.data });
         let time = 0

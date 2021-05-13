@@ -31,7 +31,7 @@ function EditItem(props) {
         setType(product.type_product_id);
     }
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/product/${itemid}`)
+        axios.get(`/api/product/${itemid}`)
             .then(pro => {
                 if (JSON.stringify(product) != JSON.stringify(pro.data)) {
                     setproduct(pro.data);
@@ -39,7 +39,7 @@ function EditItem(props) {
             })
     }, [product]);
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/type_product/all`)
+        axios.get(`/api/type_product/all`)
             .then(res => {
                 if (JSON.stringify(product_type) != JSON.stringify(res.data)) {
                     setProduct_type(res.data);
@@ -88,7 +88,7 @@ function EditItem(props) {
 
         };
         console.log(product)
-        axios.put(`http://localhost:8080/api/product/${itemid}`, product)
+        axios.put(`/api/product/${itemid}`, product)
             .then(res => {
                 console.log(res);
                 console.log(res.data);

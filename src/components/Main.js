@@ -35,7 +35,7 @@ function App(props) {
       sales: total,
       user_id: 1,
     };
-    axios.post(`http://localhost:8080/api/sales/`, sales)
+    axios.post(`/api/sales/`, sales)
       .then(res => {
         console.log(res);
         console.log(res.data);

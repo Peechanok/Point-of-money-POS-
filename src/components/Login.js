@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import rootReducer from '../store/reducers/rootReducer'
 import PropTypes from 'prop-types';
 async function loginUser(credentials) {
-  return fetch('http://localhost:8080/api/user/all', {
+  return fetch('/api/user/all', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -18,7 +18,7 @@ class Warehouse extends Component {
     }
     handleDelete(id){
         console.log(id);
-        axios.delete(`http://localhost:8080/api/product/${id}`)  
+        axios.delete(`/api/product/${id}`)  
             .then(res => {  
             console.log(res);
             console.log(res.data);  
@@ -62,11 +62,11 @@ class Warehouse extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8080/api/product/all`)
+        axios.get(`/api/product/all`)
             .then(res => {
                 this.setState({ product: res.data });
             })
-        axios.get(`http://localhost:8080/api/type_product/all`)
+        axios.get(`/api/type_product/all`)
             .then(res => {
                 this.setState({ product_type: res.data });
             })

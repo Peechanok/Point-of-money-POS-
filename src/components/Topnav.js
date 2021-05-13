@@ -22,7 +22,7 @@ function Navigations() {
   const [warn, setWarn] = useState(0);
   const [product, setproduct] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/product/all`)
+    axios.get(`/api/product/all`)
       .then(pro => {
         if (JSON.stringify(product) != JSON.stringify(pro.data)) {
           setproduct(pro.data);
