@@ -87,23 +87,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### http://localhost:8080/api/user/.
 
 
-[url=https://postimg.cc/H847qWqc][img]https://i.postimg.cc/H847qWqc/Screenshot-1.png[/img][/url]
-
-[url=https://postimg.cc/WtMrFSdN][img]https://i.postimg.cc/WtMrFSdN/Screenshot-2.png[/img][/url]
-
-[url=https://postimg.cc/9rC9GT9G][img]https://i.postimg.cc/9rC9GT9G/Screenshot-3.png[/img][/url]
-
-[url=https://postimg.cc/342yGJJS][img]https://i.postimg.cc/342yGJJS/Screenshot-4.png[/img][/url]
-
-[url=https://postimg.cc/0zHJRBBf][img]https://i.postimg.cc/0zHJRBBf/Screenshot-5.png[/img][/url]
-
-[url=https://postimg.cc/7CFGbTDJ][img]https://i.postimg.cc/7CFGbTDJ/Screenshot-6.png[/img][/url]
-
-[url=https://postimg.cc/VSr0YFyc][img]https://i.postimg.cc/VSr0YFyc/Screenshot-7.png[/img][/url]
-
-[url=https://postimg.cc/VdgC4692][img]https://i.postimg.cc/VdgC4692/Screenshot-8.png[/img][/url]
-
-[url=https://postimg.cc/K1YgW2Jj][img]https://i.postimg.cc/K1YgW2Jj/Screenshot-9.png[/img][/url]
-
-
-
+[![Screenshot-1.png](https://i.postimg.cc/L5GBZnvT/Screenshot-1.png)](https://postimg.cc/H847qWqc)
+[![Screenshot-2.png](https://i.postimg.cc/NGnxnzYH/Screenshot-2.png)](https://postimg.cc/WtMrFSdN)
+[![Screenshot-3.png](https://i.postimg.cc/RVnTxLVb/Screenshot-3.png)](https://postimg.cc/9rC9GT9G)
+[![Screenshot-4.png](https://i.postimg.cc/Jn2j9swL/Screenshot-4.png)](https://postimg.cc/342yGJJS)
+[![Screenshot-6.png](https://i.postimg.cc/3RRgSgc1/Screenshot-6.png)](https://postimg.cc/7CFGbTDJ)
+[![Screenshot-5.png](https://i.postimg.cc/KYm7LX7d/Screenshot-5.png)](https://postimg.cc/0zHJRBBf)
+[![Screenshot-7.png](https://i.postimg.cc/PqKWQ62N/Screenshot-7.png)](https://postimg.cc/VSr0YFyc)
+[![Screenshot-8.png](https://i.postimg.cc/VkQWf0Js/Screenshot-8.png)](https://postimg.cc/VdgC4692)
+[![Screenshot-9.png](https://i.postimg.cc/K8PrRcTP/Screenshot-9.png)](https://postimg.cc/K1YgW2Jj)
